@@ -24,7 +24,21 @@ using namespace std;
 
 class Airport {
 public:
+    Airport(); 
+    Airport(string name, double latitude, double longitude); 
     
+    bool operator<(const Airport& other) const; 
+    bool operator==(const Airport& other) const; 
+
+    string getName();
+    void setName(string name);
+
+    double getLatitude();
+    void setLatitude(double latitude);
+
+    double getLongitude();
+    void setLongitude(double longitude);
+
 private:
     string name_;
     double latitude_;
