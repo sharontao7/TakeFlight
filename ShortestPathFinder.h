@@ -9,6 +9,7 @@ using namespace std;
 
 class ShortestPathFinder {
 public:
+    ShortestPathFinder();
     ShortestPathFinder(const Graph & graph);
     ~ShortestPathFinder();
     
@@ -23,5 +24,8 @@ public:
     vector<Airport> getLandmarkPath(Airport start, Airport toVisit, Airport end);
     
 private:
-    Graph * graph_;
+    Graph graph_;
+    vector<Airport> data;
+    
+    
 };
