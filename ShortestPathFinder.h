@@ -2,16 +2,17 @@
 
 #include <vector>
 #include <map>
+#include <string>
 
 #include "Graph.h"
 #include "Airport.h"
-#include "Route.h"
 
 using namespace std;
 
 class ShortestPathFinder {
 public:
     ShortestPathFinder();
+    ShortestPathFinder(string airportFile, string routeFile);
     ShortestPathFinder(const Graph & graph);
     ~ShortestPathFinder();
     
@@ -27,7 +28,10 @@ public:
     
 private:
     Graph graph_;
-    vector<Airport> airports;
-    vector<Route> routes;
+    map<string, std::pair<int, int>> airports;
+    // can replace pair w Airport class later to hold more var
+    // can also read airline data later to let user know what airline to take
     
+    void readAirportData(string filename);      // initialize airports & vertices in graph
+    void readRouteData(string filename);        // create edges iin graph
 };

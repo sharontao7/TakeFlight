@@ -1,8 +1,12 @@
 #include <iostream>
 #include <vector>
 
-int main(int argc, const char * argv[]) {
+#include "ShortestPathFinder.h"
+
+int main(/* int argc, const char * argv[]*/) {
     // TODO
+    
+    ShortestPathFinder spf("airports_sample.dat", "temp");
     
     return 0;
 }
