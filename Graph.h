@@ -1,3 +1,4 @@
+// taken from lab_ml
 #pragma once
 
 #include <list>
@@ -14,7 +15,6 @@
 #include <sstream>
 #include <vector>
 
-#include "Airport.h"
 #include "edge.h"
 #include "random.h"
 
@@ -34,10 +34,9 @@ using std::unordered_map;
 /**
  * Represents a graph; used by the GraphTools class.
  *
- * source: Fall 2020 lab_ml
- *
  */
-class Graph {
+class Graph
+{
 public:
     /**
      * Constructor to create an empty graph.
@@ -58,40 +57,40 @@ public:
      * Constructor to create a random, connected graph.
      * @param weighted - specifies whether the graph is a weighted graph or
      *  not
-     * @param airports - the airports to generate a graph for
+     * @param numVertices - the number of vertices the graph will have
      * @param seed - a random seed to create the graph with
      */
-    Graph(bool weighted, std::vector<Airport> airports, unsigned long seed);
+    Graph(bool weighted, int numVertices, unsigned long seed);
 
     /**
-     * Gets all adjacent vertices to the parameter Airport.
-     * @param source - Airport to get neighbors from
+     * Gets all adjacent vertices to the parameter vertex.
+     * @param source - vertex to get neighbors from
      * @return a vector of vertices
      */
-    vector<Airport> getAdjacent(Airport source) const;
+    vector<Vertex> getAdjacent(Vertex source) const;
 
     /**
-     * Returns one Airport in the graph. This function can be used
-     *  to find a random Airport with which to start a traversal.
-     * @return a Airport from the graph
+     * Returns one vertex in the graph. This function can be used
+     *  to find a random vertex with which to start a traversal.
+     * @return a vertex from the graph
      */
-    Airport getStartingAirport() const;
+    Vertex getStartingVertex() const;
 
     /**
      * Gets all vertices in the graph.
      * @return a vector of all vertices in the graph
      */
-    vector<Airport> getAirports() const;
+    vector<Vertex> getVertices() const;
     
 
     /**
      * Gets an edge between two vertices.
-     * @param source - one Airport the edge is connected to
-     * @param destination - the other Airport the edge is connected to
+     * @param source - one vertex the edge is connected to
+     * @param destination - the other vertex the edge is connected to
      * @return - if exist, return the corresponding edge
      *         - if edge doesn't exist, return Edge()
      */
-    Edge getEdge(Airport source, Airport destination) const;
+    Edge getEdge(Vertex source, Vertex destination) const;
 
     /**
      * Gets all the edges in the graph.
@@ -100,88 +99,88 @@ public:
     vector<Edge> getEdges() const;
 
     /**
-     * Checks if the given Airport exists.
-     * @return - if Airport exists, true
-     *         - if Airport doesn't exist, return false
+     * Checks if the given vertex exists.
+     * @return - if Vertex exists, true
+     *         - if Vertex doesn't exist, return false
      */
-    bool AirportExists (Airport v) const;
+    bool vertexExists (Vertex v) const;
 
     /**
      * Checks if edge exists between two vertices exists.
      * @return - if Edge exists, true
      *         - if Edge doesn't exist, return false
      */
-    bool edgeExists(Airport source, Airport destination) const;
+    bool edgeExists(Vertex source, Vertex destination) const;
 
-        /**
+    /**
      * Sets the edge label of the edge between vertices u and v.
-     * @param source - one Airport the edge is connected to
-     * @param destination - the other Airport the edge is connected to
+     * @param source - one vertex the edge is connected to
+     * @param destination - the other vertex the edge is connected to
      * @return - if edge exists, set the label to the corresponding edge(if not directed, set the reverse one too), return edge with new label
      *         - if edge doesn't exist, return InvalidEdge
      */
-        Edge setEdgeLabel(Airport source, Airport destination, string label);
+    Edge setEdgeLabel(Vertex source, Vertex destination, string label);
 
     /**
      * Gets the edge label of the edge between vertices u and v.
-     * @param source - one Airport the edge is connected to
-     * @param destination - the other Airport the edge is connected to
+     * @param source - one vertex the edge is connected to
+     * @param destination - the other vertex the edge is connected to
      * @return - if edge exists, return edge label
      *         - if edge doesn't exist, return InvalidLabel
      */
-    string getEdgeLabel(Airport source, Airport destination) const;
+    string getEdgeLabel(Vertex source, Vertex destination) const;
 
     /**
      * Gets the weight of the edge between two vertices.
-     * @param source - one Airport the edge is connected to
-     * @param destination - the other Airport the edge is connected to
+     * @param source - one vertex the edge is connected to
+     * @param destination - the other vertex the edge is connected to
      * @return - if edge exists, return edge wright
      *         - if doesn't, return InvalidWeight
      */
-    int getEdgeWeight(Airport source, Airport destination) const;
+    int getEdgeWeight(Vertex source, Vertex destination) const;
 
     /**
-     * Inserts a new Airport into the graph and initializes its label as "".
-     * @param v - the name for the Airport
+     * Inserts a new vertex into the graph and initializes its label as "".
+     * @param v - the name for the vertex
      */
-    void insertAirport(Airport v);
+    void insertVertex(Vertex v);
 
     /**
-     * Removes a given Airport from the graph.
-     * @param v - the Airport to remove
+     * Removes a given vertex from the graph.
+     * @param v - the vertex to remove
      * @return - if v exists, return v
-     *         - if not, return InvalidAirport;
+     *         - if not, return InvalidVertex;
      */
-    Airport removeAirport(Airport v);
+    Vertex removeVertex(Vertex v);
 
     /**
      * Inserts an edge between two vertices.
      * A boolean is returned for use with the random graph generation.
      * Hence, an error is not thrown when it fails to insert an edge.
-     * @param source - one Airport the edge is connected to
-     * @param destination - the other Airport the edge is connected to
+     * @param source - one vertex the edge is connected to
+     * @param destination - the other vertex the edge is connected to
      * @return whether inserting the edge was successful
      */
-    bool insertEdge(Airport source, Airport destination);
+    bool insertEdge(Vertex source, Vertex destination);
 
     /**
      * Removes the edge between two vertices.
-     * @param source - one Airport the edge is connected to
-     * @param destination - the other Airport the edge is connected to
+     * @param source - one vertex the edge is connected to
+     * @param destination - the other vertex the edge is connected to
      * @return - if edge exists, remove it and return removed edge
      *         - if not, return InvalidEdge
      */
-    Edge removeEdge(Airport source, Airport destination);
+    Edge removeEdge(Vertex source, Vertex destination);
 
     /**
      * Sets the weight of the edge between two vertices.
-     * @param source - one Airport the edge is connected to
-     * @param destination - the other Airport the edge is connected to
+     * @param source - one vertex the edge is connected to
+     * @param destination - the other vertex the edge is connected to
      * @param weight - the weight to set to the edge
      * @return - if edge exists, set edge weight and return  edge with new weight
      *         - if not, return InvalidEdge
      */
-    Edge setEdgeWeight(Airport source, Airport destination, int weight);
+    Edge setEdgeWeight(Vertex source, Vertex destination, int weight);
 
     /**
      * Creates a name for snapshots of the graph.
@@ -211,13 +210,13 @@ public:
     void clear();
 
 
-    const static Airport InvalidAirport;
+    const static Vertex InvalidVertex;
     const static Edge InvalidEdge;
     const static int InvalidWeight;
     const static string InvalidLabel;
 
 private:
-    mutable unordered_map<Airport, unordered_map<Airport, Edge>> adjacency_list;
+    mutable unordered_map<Vertex, unordered_map<Vertex, Edge>> adjacency_list;
 
     bool weighted;
     bool directed;
@@ -227,21 +226,21 @@ private:
 
 
     /**
-     * Returns whether a given Airport exists in the graph.
-     * @param v - the Airport to check
+     * Returns whether a given vertex exists in the graph.
+     * @param v - the vertex to check
      * @param functionName - the name of the calling function to return
      *  in the event of an error
      */
-    bool assertAirportExists(Airport v, string functionName) const;
+    bool assertVertexExists(Vertex v, string functionName) const;
 
     /**
      * Returns whether thee edge exists in the graph.
-     * @param source - one Airport
-     * @param destination - another Airport
+     * @param source - one vertex
+     * @param destination - another vertex
      * @param functionName - the name of the calling function to return
      *  in the event of an error
      */
-    bool assertEdgeExists(Airport source, Airport destination, string functionName) const;
+    bool assertEdgeExists(Vertex source, Vertex destination, string functionName) const;
 
 
     /**
