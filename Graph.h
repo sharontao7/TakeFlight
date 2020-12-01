@@ -58,10 +58,10 @@ public:
      * Constructor to create a random, connected graph.
      * @param weighted - specifies whether the graph is a weighted graph or
      *  not
-     * @param numVertices - the number of vertices the graph will have
+     * @param airports - the airports to generate a graph for
      * @param seed - a random seed to create the graph with
      */
-    Graph(bool weighted, int numVertices, unsigned long seed);
+    Graph(bool weighted, std::vector<Airport> airports, unsigned long seed);
 
     /**
      * Gets all adjacent vertices to the parameter Airport.
@@ -81,7 +81,7 @@ public:
      * Gets all vertices in the graph.
      * @return a vector of all vertices in the graph
      */
-    vector<Airport> getVertices() const;
+    vector<Airport> getAirports() const;
     
 
     /**
