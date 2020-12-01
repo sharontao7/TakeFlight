@@ -1,5 +1,6 @@
 #include "ShortestPathFinder.h"
+#include "Graph.h"
 
-ShortestPathFinder::ShortestPathFinder() {
+ShortestPathFinder::ShortestPathFinder() : graph_(true, true) {
     
 }

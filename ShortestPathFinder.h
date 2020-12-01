@@ -1,9 +1,11 @@
 #pragma once
 
 #include <vector>
+#include <map>
 
 #include "Graph.h"
 #include "Airport.h"
+#include "Route.h"
 
 using namespace std;
 
@@ -25,7 +27,7 @@ public:
     
 private:
     Graph graph_;
-    vector<Airport> data;
-    
+    vector<Airport> airports;
+    vector<Route> routes;
     
 };
