@@ -1,6 +1,6 @@
 #include "Graph.h"
 
-const Airport Graph::InvalidAirport = "_INVALIDAIRPORT";
+const Airport Graph::InvalidAirport = Airport(0.0, 0.0, "_INVALIDAIRPORT");
 const int Graph::InvalidWeight = INT_MIN;
 const string Graph:: InvalidLabel = "_INVALIDLABEL";
 const Edge Graph::InvalidEdge = Edge(Graph::InvalidAirport, Graph::InvalidAirport, Graph::InvalidWeight, Graph::InvalidLabel);
@@ -261,7 +261,7 @@ bool Graph::assertEdgeExists(Airport source, Airport destination, string functio
 
     if (adjacency_list[source].find(destination)== adjacency_list[source].end()) {
         if (functionName != "")
-            error(functionName + " called on nonexistent edge " + source + " -> " + destination);
+            error(functionName + " called on nonexistent edge " + source.name_ + " -> " + destination.name_);
         return false;
     }
 
@@ -270,7 +270,7 @@ bool Graph::assertEdgeExists(Airport source, Airport destination, string functio
             return false;
         if(adjacency_list[destination].find(source)== adjacency_list[destination].end()) {
             if (functionName != "")
-                error(functionName + " called on nonexistent edge " + destination + " -> " + source);
+                error(functionName + " called on nonexistent edge " + destination.name_ + " -> " + source.name_);
             return false;
         }
     }
