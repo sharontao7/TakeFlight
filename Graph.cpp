@@ -7,6 +7,10 @@ const int Graph::InvalidWeight = INT_MIN;
 const string Graph:: InvalidLabel = "_CS225INVALIDLABEL";
 const Edge Graph::InvalidEdge = Edge(Graph::InvalidVertex, Graph::InvalidVertex, Graph::InvalidWeight, Graph::InvalidLabel);
 
+Graph::Graph() : weighted(true), directed(false), random(Random(0))
+{
+}
+
 Graph::Graph(bool weighted) : weighted(weighted),directed(false),random(Random(0))
 {
 }

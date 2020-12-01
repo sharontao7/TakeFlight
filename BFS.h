@@ -11,26 +11,26 @@
 
 #include "Graph.h"
 #include "Airport.h"
+#include "ImageTraversal.h"
 
-class BFS {
+class BFS : public ImageTraversal {
 public:
-    BFS(const Graph & graph, const Airport & start);
+    BFS(const Graph & graph, const Vertex & start);
     ~BFS();
-    
-    // we need to change iterators
-    // ImageTraversal::Iterator begin();
-    // ImageTraversal::Iterator end();
-    
-    void add(const Airport & airport); // airport?
-    Airport pop();
-    Airport peek() const;
+
+    ImageTraversal::Iterator begin();
+    ImageTraversal::Iterator end();
+
+    void add(const Vertex & airport); // airport?
+    Vertex pop();
+    Vertex peek() const;
     bool empty() const;
     
 private:
     /** @todo [Part 1] */
     /** add private members here*/
-    Graph * graph_;
-    Airport start_;
-    std::queue<Airport> airports_;
+    Graph graph_;
+    Vertex start_;
+    std::queue<Vertex> airports_;
     bool * visited_;
 };

@@ -38,6 +38,7 @@ using std::unordered_map;
 class Graph
 {
 public:
+    Graph();
     /**
      * Constructor to create an empty graph.
      * @param weighted - specifies whether the graph is a weighted graph or
