@@ -24,29 +24,6 @@ using namespace std;
  Source - data source
  */
 
-class Airport {
-public:
-    Airport(); 
-    Airport(string name, double latitude, double longitude); 
-    
-    bool operator<(const Airport& other) const; 
-    bool operator==(const Airport& other) const; 
-
-    string getName();
-    void setName(string name);
-
-    double getLatitude();
-    void setLatitude(double latitude);
-
-    double getLongitude();
-    void setLongitude(double longitude);
-
-private:
-    string name_;
-    double latitude_;
-    double longitude_;
-};
-
 /**
  * Simple Airport class containing a public double 'latitude' and 'longitude' to represent 2D points 
  * on a map. Also contains a public string 'name' to represent the name of the Airport. 
