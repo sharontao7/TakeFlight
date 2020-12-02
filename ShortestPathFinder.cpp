@@ -47,33 +47,33 @@ void ShortestPathFinder::readAirportData(string fileName) {
         int infoNum = 0;
         string ID;
         //string IATA;
-        int lat, lon;
+        double lat, lon;
         
         while (getline(s, word, ',')) {
-            if (infoNum == 0) {             // IATA = 3, ID = 0
+            if (infoNum == 0) {             // IATA = 4, ID = 0
                 ID = word;
                 //IATA = word;
-            } else if (infoNum == 5) {      // latitude
+            } else if (infoNum == 6) {      // latitude
                 stringstream lat_string(word);
                 lat_string >> lat;
-            } else if (infoNum == 6) {      // longitude
+            } else if (infoNum == 7) {      // longitude
                 stringstream lon_string(word);
                 lon_string >> lon;
             }
             infoNum++;
         }
         
-        airports[ID] = std::pair<int, int>(lat, lon);
+        airports[ID] = std::pair<double, double>(lat, lon);
         graph_.insertVertex(ID);
     }
     
     graph_.print();
     
-    /* // print dictionary
-    for (std::pair<string, std::pair<int, int>> airport : airports) {
+     // print dictionary
+    for (std::pair<string, std::pair<double, double>> airport : airports) {
         std::cout << "Airport: " << airport.first << " " << airport.second.first << " " << airport.second.second << std::endl;
     }
-     */
+    
 }
 
 void ShortestPathFinder::readRouteData(string fileName) {
@@ -92,8 +92,16 @@ void ShortestPathFinder::readRouteData(string fileName) {
         string sourceIATA, destIATA;
         
         while (getline(s, word, ',')) {
-            std::cout << "" << word << std::endl;
+            if (infoNum == 3) {
+                sourceIATA = word;
+            } else if (infoNum == 5) {
+                destIATA = word;
+            }
             infoNum++;
         }
+        
+        graph_.insertEdge(sourceIATA, destIATA);
     }
+    
+    graph_.print();
 }

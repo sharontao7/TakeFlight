@@ -28,7 +28,7 @@ public:
     
 private:
     Graph graph_;
-    map<string, std::pair<int, int>> airports;
+    map<string, std::pair<double, double>> airports;
     // can replace pair w Airport class later to hold more var
     // can also read airline data later to let user know what airline to take
     
