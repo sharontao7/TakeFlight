@@ -45,14 +45,14 @@ void ShortestPathFinder::readAirportData(string fileName) {
         stringstream s(line);
         
         int infoNum = 0;
-        //string ID;
-        string IATA;
+        string ID;
+        //string IATA;
         int lat, lon;
         
         while (getline(s, word, ',')) {
-            if (infoNum == 3) {             // airport IATA (id num == 0)
-                //ID = word;
-                IATA = word;
+            if (infoNum == 0) {             // IATA = 3, ID = 0
+                ID = word;
+                //IATA = word;
             } else if (infoNum == 5) {      // latitude
                 stringstream lat_string(word);
                 lat_string >> lat;
@@ -63,8 +63,8 @@ void ShortestPathFinder::readAirportData(string fileName) {
             infoNum++;
         }
         
-        airports[IATA] = std::pair<int, int>(lat, lon);
-        graph_.insertVertex(IATA);
+        airports[ID] = std::pair<int, int>(lat, lon);
+        graph_.insertVertex(ID);
     }
     
     graph_.print();
@@ -80,4 +80,20 @@ void ShortestPathFinder::readRouteData(string fileName) {
     fstream fin;
     
     fin.open(fileName, ios::in);
+    
+    string line, word, temp;
+    
+    while (fin >> temp) {
+        getline(fin, line);
+        stringstream s(line);
+        
+        int infoNum = 0;
+        //string ID;
+        string sourceIATA, destIATA;
+        
+        while (getline(s, word, ',')) {
+            std::cout << "" << word << std::endl;
+            infoNum++;
+        }
+    }
 }
