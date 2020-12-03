@@ -59,8 +59,9 @@ void ShortestPathFinder::readAirportData(string fileName) {
     }
     
     //graph_.print();
+    
     /*
-     // print dictionary
+    // print dictionary
     for (std::pair<string, std::pair<double, double>> airport : airports) {
         std::cout << "Airport: " << airport.first << " " << airport.second.first << " " << airport.second.second << std::endl;
     }
@@ -68,21 +69,21 @@ void ShortestPathFinder::readAirportData(string fileName) {
 }
 
 void ShortestPathFinder::readRouteData(string fileName) {
-    fstream fin;
+    ifstream infile(fileName);
     
-    fin.open(fileName, ios::in);
-    
-    string line, word, temp;
-    
-    while (fin >> temp) {
-        getline(fin, line);
-        stringstream s(line);
+    while (infile) {
+        string line;
+        if (!getline(infile, line))
+            break;
+        istringstream s(line);
         
         int infoNum = 0;
-        //string ID;
         string sourceID, destID;
         
-        while (getline(s, word, ',')) {
+        while (s) {
+            string word;
+            if (!getline(s, word, ',' ))
+                break;
             if (infoNum == 3) {
                 sourceID = word;
             } else if (infoNum == 5) {
@@ -93,10 +94,15 @@ void ShortestPathFinder::readRouteData(string fileName) {
         
         graph_.insertEdge(sourceID, destID);
         
+        // set edge weight as distance between source & dest
         std::pair<double, double> sourceLoc = airports[sourceID];
         std::pair<double, double> destLoc = airports[destID];
         int dist = sqrt(pow(sourceLoc.first - destLoc.first, 2) + pow(sourceLoc.second - destLoc.second, 2));
         graph_.setEdgeWeight(sourceID, destID, dist);
+    }
+    if (!infile.eof())
+    {
+        cerr << "Error\n";
     }
     
     graph_.print();
