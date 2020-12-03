@@ -1,3 +1,8 @@
+#include <fstream>
+#include <iostream>
+#include <sstream>
+#include <string>
+
 #include "ShortestPathFinder.h"
 #include "Graph.h"
 
@@ -16,54 +21,24 @@ ShortestPathFinder::~ShortestPathFinder() {
 }
 
 void ShortestPathFinder::readAirportData(string fileName) {
-    /*
-    fstream fout;
+    ifstream infile(fileName);
     
-    // opens an existing csv file or creates a new file.
-    fout.open(file name goes here, ios::out | ios::app);
-    
-    fstream fin;
-    
-    fin.open(fileName, ios::in);
-    
-    string line, word, temp;
-    
-    int ind = 1;
-    
-    while (fin >> temp) {
-        getline(fin, line);
-        stringstream s(line);
-        
-        fout << " , " << ind << ", ";
-        
-        while (getline(s, word, ',')) {
-            fout << word << ", ";
-        }
-        
-        fout << "\n";
-        ind ++;
-    }
-    */
-    
-    fstream fin;
-    
-    fin.open(fileName, ios::in);
-    
-    string line, word, temp;
-    
-    while (fin >> temp) {
-        getline(fin, line);
-        stringstream s(line);
+    while (infile) {
+        string line;
+        if (!getline(infile, line))
+            break;
+        istringstream s(line);
         
         int infoNum = 0;
         string ID;
-        //string IATA;
         double lat, lon;
         
-        while (getline(s, word, ',')) {
-            if (infoNum == 0) {             // IATA = 4, ID = 0
+        while (s) {
+            string word;
+            if (!getline(s, word, ',' ))
+                break;
+            if (infoNum == 0) {             // ID = 0
                 ID = word;
-                //IATA = word;
             } else if (infoNum == 6) {      // latitude
                 stringstream lat_string(word);
                 lat_string >> lat;
@@ -78,9 +53,12 @@ void ShortestPathFinder::readAirportData(string fileName) {
         if (!graph_.vertexExists(ID))
             graph_.insertVertex(ID);
     }
-
-    graph_.print();
+    if (!infile.eof())
+    {
+        cerr << "Error\n";
+    }
     
+    //graph_.print();
     /*
      // print dictionary
     for (std::pair<string, std::pair<double, double>> airport : airports) {
