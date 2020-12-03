@@ -12,17 +12,38 @@ ShortestPathFinder::ShortestPathFinder(string airportFile, string routeFile) : g
 }
 
 ShortestPathFinder::~ShortestPathFinder() {
-    
+    airports.clear();
 }
-
 
 void ShortestPathFinder::readAirportData(string fileName) {
     /*
     fstream fout;
     
     // opens an existing csv file or creates a new file.
-    fout.open("airports_sample.csv", ios::out | ios::app);
-     */
+    fout.open(file name goes here, ios::out | ios::app);
+    
+    fstream fin;
+    
+    fin.open(fileName, ios::in);
+    
+    string line, word, temp;
+    
+    int ind = 1;
+    
+    while (fin >> temp) {
+        getline(fin, line);
+        stringstream s(line);
+        
+        fout << " , " << ind << ", ";
+        
+        while (getline(s, word, ',')) {
+            fout << word << ", ";
+        }
+        
+        fout << "\n";
+        ind ++;
+    }
+    */
     
     fstream fin;
     
@@ -31,16 +52,6 @@ void ShortestPathFinder::readAirportData(string fileName) {
     string line, word, temp;
     
     while (fin >> temp) {
-        /* for converting file to CSV
-        getline(fin, line);
-        stringstream s(line);
-        
-        while (getline(s, word, ',')) {
-            fout << word << ", ";
-        }
-        
-        fout << "\n";*/
-        
         getline(fin, line);
         stringstream s(line);
         
@@ -64,16 +75,18 @@ void ShortestPathFinder::readAirportData(string fileName) {
         }
         
         airports[ID] = std::pair<double, double>(lat, lon);
-        graph_.insertVertex(ID);
+        if (!graph_.vertexExists(ID))
+            graph_.insertVertex(ID);
     }
-    
+
     graph_.print();
     
+    /*
      // print dictionary
     for (std::pair<string, std::pair<double, double>> airport : airports) {
         std::cout << "Airport: " << airport.first << " " << airport.second.first << " " << airport.second.second << std::endl;
     }
-    
+    */
 }
 
 void ShortestPathFinder::readRouteData(string fileName) {
@@ -89,18 +102,23 @@ void ShortestPathFinder::readRouteData(string fileName) {
         
         int infoNum = 0;
         //string ID;
-        string sourceIATA, destIATA;
+        string sourceID, destID;
         
         while (getline(s, word, ',')) {
             if (infoNum == 3) {
-                sourceIATA = word;
+                sourceID = word;
             } else if (infoNum == 5) {
-                destIATA = word;
+                destID = word;
             }
             infoNum++;
         }
         
-        graph_.insertEdge(sourceIATA, destIATA);
+        graph_.insertEdge(sourceID, destID);
+        
+        std::pair<double, double> sourceLoc = airports[sourceID];
+        std::pair<double, double> destLoc = airports[destID];
+        int dist = sqrt(pow(sourceLoc.first - destLoc.first, 2) + pow(sourceLoc.second - destLoc.second, 2));
+        graph_.setEdgeWeight(sourceID, destID, dist);
     }
     
     graph_.print();
