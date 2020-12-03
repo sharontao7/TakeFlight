@@ -37,12 +37,12 @@ void ShortestPathFinder::readAirportData(string fileName) {
             string word;
             if (!getline(s, word, ',' ))
                 break;
-            if (infoNum == 0) {             // ID = 0
+            if (infoNum == 0) {                     // ID = 0
                 ID = word;
-            } else if (infoNum == 6) {      // latitude
+            } else if (infoNum == 6) {              // latitude
                 stringstream lat_string(word);
                 lat_string >> lat;
-            } else if (infoNum == 7) {      // longitude
+            } else if (infoNum == 7) {              // longitude
                 stringstream lon_string(word);
                 lon_string >> lon;
             }

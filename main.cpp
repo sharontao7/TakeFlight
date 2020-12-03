@@ -6,7 +6,7 @@
 int main(/* int argc, const char * argv[]*/) {
     // TODO
     
-    ShortestPathFinder spf("airports_sample.dat", "routes_sample.dat");
+    ShortestPathFinder spf("airports.dat", "routes.dat");
     
     return 0;
 }
