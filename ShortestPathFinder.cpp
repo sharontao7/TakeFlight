@@ -48,8 +48,10 @@ void ShortestPathFinder::readAirportData(string fileName) {
             }
             infoNum++;
         }
-        
-        airports[ID] = std::pair<double, double>(lat, lon);
+
+        Airport airport = Airport(lat, lon, ID); 
+        airports[ID] = airport;
+
         if (!graph_.vertexExists(ID))
             graph_.insertVertex(ID);
     }
@@ -95,9 +97,9 @@ void ShortestPathFinder::readRouteData(string fileName) {
         graph_.insertEdge(sourceID, destID);
         
         // set edge weight as distance between source & dest
-        std::pair<double, double> sourceLoc = airports[sourceID];
-        std::pair<double, double> destLoc = airports[destID];
-        int dist = sqrt(pow(sourceLoc.first - destLoc.first, 2) + pow(sourceLoc.second - destLoc.second, 2));
+        Airport sourceLoc = airports[sourceID];
+        Airport destLoc = airports[destID];
+        int dist = sqrt(pow(sourceLoc.getLatitude() - destLoc.getLatitude(), 2) + pow(sourceLoc.getLongitude() - destLoc.getLongitude(), 2));
         graph_.setEdgeWeight(sourceID, destID, dist);
     }
     if (!infile.eof())
