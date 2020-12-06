@@ -28,42 +28,22 @@ using namespace std;
  * Simple Airport class containing a public double 'latitude' and 'longitude' to represent 2D points 
  * on a map. Also contains a public string 'name' to represent the name of the Airport. 
  */
-struct Airport {
-    double latitude_; 
-    double longitude_; 
-    string name_; 
+class Airport {
+    public: 
+        Airport(); 
+        Airport(double latitude, double longitude, string name); 
 
-    /**
-     * Default constructor, sets the latitude and longitude to 0.0 and the name to an empty string
-     */
-    Airport() : Airport(0.0, 0.0, "") { }
+        bool operator<(const Airport &other) const; 
+        bool operator==(const Airport &other) const; 
 
-    /**
-     * Constructor
-     * @param latitude latitude of the Airport
-     * @param longitude longitude of the Airport
-     * @param name name of the Airport
-     */
-    Airport(double latitude, double longitude, string name) : latitude_(latitude), longitude_(longitude), 
-        name_(name) { }
+        double getLatitude() const; 
+        double getLongitude() const;
+        string getName() const; 
 
-    /**
-     * overload operator < 
-     * @param other the other Airport
-     * @return true for smaller, false otherwise
-     */
-    bool operator<(const Airport& other) const {
-        return (latitude_ < other.latitude_ || longitude_ < other.longitude_); 
-    }
-
-    /**
-     * overload operator ==
-     * @param other the other Airport
-     * @return true for equal, false otherwise 
-     */
-    bool operator==(const Airport& other) const {
-        return (latitude_ == other.latitude_ && longitude_ == other.longitude_ && name_ == other.name_); 
-    }
+    private: 
+        double latitude_; 
+        double longitude_; 
+        string name_; 
 }; 
 
 /**
@@ -73,7 +53,10 @@ struct Airport {
  * @param airport the Airport to print
  * @return output stream
  */
-inline std::ostream& operator<<(std::ostream& out, Airport const& airport) {
-    out << airport.name_ << ": " << airport.latitude_ << ", " << airport.longitude_; 
-    return out; 
-}
+inline std::ostream &operator<<(std::ostream &out, Airport const &airport)
+{
+    out << airport.getName() << ": " << airport.getLatitude() << ", " << airport.getLongitude();
+    return out;
+}; 
+
+   
