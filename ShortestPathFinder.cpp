@@ -135,10 +135,6 @@ string ShortestPathFinder::closestAirport(map<string, int> distMap, map<string, 
     return min_airport; 
 }
 
-vector<Airport> ShortestPathFinder::BFSTraversal(Vertex start) {
-    
-}
-
 vector<Airport> ShortestPathFinder::getShortestPath(Vertex start, Vertex end) {
 
     vector<Airport> ret;
@@ -175,8 +171,7 @@ vector<Airport> ShortestPathFinder::getShortestPath(Vertex start, Vertex end) {
     return ret;
 }
 
-vector<Airport> ShortestPathFinder::BFSTraversal() {
-    Vertex start_ = "1";
+vector<Airport> ShortestPathFinder::BFSTraversal(Vertex start_) {
     BFS bfs(graph_, start_);
 
     std::cout << "start: " << start_ << std::endl;
