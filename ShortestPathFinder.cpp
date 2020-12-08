@@ -62,12 +62,12 @@ void ShortestPathFinder::readAirportData(string fileName) {
     
     //graph_.print();
     
-    
+    /*
     // print dictionary
     for (std::pair<string, Airport> airport : airports) {
         std::cout << "Airport: " << airport.second.getName() << " " << airport.second.getLatitude() << " " << airport.second.getLongitude() << std::endl;
     }
-    
+    */
 }
 
 void ShortestPathFinder::readRouteData(string fileName) {
@@ -131,7 +131,11 @@ string ShortestPathFinder::closestAirport(map<string, int> distMap, map<string, 
     }
   
     return min_airport; 
-} 
+}
+
+vector<Airport> ShortestPathFinder::BFSTraversal(Vertex start) {
+    
+}
 
 vector<Airport> ShortestPathFinder::getShortestPath(Vertex start, Vertex end) {
 

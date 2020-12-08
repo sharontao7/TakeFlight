@@ -11,15 +11,15 @@
 
 #include "Graph.h"
 #include "Airport.h"
-#include "ImageTraversal.h"
+#include "Traversal.h"
 
-class BFS : public ImageTraversal {
+class BFS : public Traversal {
 public:
     BFS(const Graph & graph, const Vertex & start);
     ~BFS();
 
-    ImageTraversal::Iterator begin();
-    ImageTraversal::Iterator end();
+    Traversal::Iterator begin();
+    Traversal::Iterator end();
 
     void add(const Vertex & airport); // airport?
     Vertex pop();

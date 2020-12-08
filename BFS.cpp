@@ -11,7 +11,7 @@
 #include "Airport.h"
 #include "Graph.h"
 
-#include "ImageTraversal.h"
+#include "Traversal.h"
 
 using namespace cs225;
 
@@ -33,18 +33,18 @@ BFS::BFS(const Graph & graph, const Vertex & start) {
 /**
  * Returns an iterator for the traversal starting at the first point.
  */
-ImageTraversal::Iterator BFS::begin() {
+Traversal::Iterator BFS::begin() {
   /** @todo [Part 1] */
-  Iterator iterator_ = ImageTraversal::Iterator(graph_, start_, this);
+  Iterator iterator_ = Traversal::Iterator(graph_, start_, this);
   return iterator_;
 }
 
 /**
  * Returns an iterator for the traversal one past the end of the traversal.
  */
-ImageTraversal::Iterator BFS::end() {
+Traversal::Iterator BFS::end() {
   /** @todo [Part 1] */
-  return ImageTraversal::Iterator();
+  return Traversal::Iterator();
 }
 
 /**

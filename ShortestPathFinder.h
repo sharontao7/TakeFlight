@@ -26,7 +26,8 @@ public:
      */
     vector<Airport> getLandmarkPath(Vertex start, Vertex end, Vertex toVisit);
     
-    vector<Airport> BFSTraversal();
+    vector<Airport> BFSTraversal(Vertex start);
+    vector<Airport> BFSTraversal(Vertex start, Vertex end);
     
 private:
     Graph graph_;
@@ -36,6 +37,4 @@ private:
     void readRouteData(string filename);        // create edges iin graph
 
     string closestAirport(map<string, int> distMap, map<string, bool> airportSet);
-    
-    vector<Airport> bfs(Vertex start, Vertex end);
 };
