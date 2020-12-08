@@ -109,3 +109,58 @@ void ShortestPathFinder::readRouteData(string fileName) {
     
     graph_.print();
 }
+
+string ShortestPathFinder::closestAirport(map<string, int> distMap, map<string, bool> airportSet) 
+{ 
+    // Initialize min value 
+    int min = INT_MAX;
+    string min_airport;
+
+    for (map<string, Airport>::iterator it = airports.begin(); it != airports.end(); it++) {
+        if (airportSet[it->first] == false) {
+            min = distMap[it->first];
+            min_airport = it->first; 
+        }
+    }
+  
+    return min_airport; 
+} 
+
+vector<Airport> ShortestPathFinder::getShortestPath(Airport start, Airport end) { 
+
+    vector<Airport> ret;
+    map<string, int> distMap; 
+    map<string, bool> airportSet;
+
+    for (map<string, Airport>::iterator it = airports.begin(); it != airports.end(); it++) {
+        if (it->first == start.getName()) {
+            distMap[it->first] = 0;
+
+        } else {
+            distMap[it->first] = INT_MAX;
+        }
+    }
+  
+    // Find shortest path for all vertices 
+    for (int count = 0; count < airports.size() - 1; count++) { 
+        // Pick the minimum distance vertex from the set of vertices not yet processed
+        string closest = closestAirport(distMap, airportSet); 
+  
+        // Mark the picked vertex as processed 
+        airportSet[closest] = true; 
+        ret.push_back(airports[closest]);
+
+        // Update dist value of the adjacent vertices of the picked vertex. 
+        for (map<string, Airport>::iterator it = airports.begin(); it != airports.end(); it++) { 
+            if (!airportSet[closest] && graph_.getEdgeWeight(closest, it->first) && distMap[closest] != INT_MAX 
+                && distMap[closest] + graph_.getEdgeWeight(closest, it->first) < distMap[it->first]) {
+                    distMap[it->first] = distMap[closest] + graph_.getEdgeWeight(closest, it->first); 
+            }
+        }
+    } 
+
+    return ret;
+
+
+} 
+
