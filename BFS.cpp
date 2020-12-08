@@ -33,6 +33,7 @@ BFS::BFS(const Graph & graph, const Vertex & start) {
  * Returns an iterator for the traversal starting at the first point.
  */
 Traversal::Iterator BFS::begin() {
+  /** @todo [Part 1] */
   Iterator iterator_ = Traversal::Iterator(graph_, start_, this);
   return iterator_;
 }

@@ -48,11 +48,16 @@ Graph.o: random.cpp Graph.cpp
 ShortestPathFinder.o: ShortestPathFinder.cpp
 	$(CXX) $(CXXFLAGS) ShortestPathFinder.cpp
 
+<<<<<<< HEAD
 test: output_msg cs225/catch/catchmain.cpp tests/tests.cpp Airport.cpp BFS.cpp Traversal.cpp Graph.cpp ShortestPathFinder.cpp
 	$(LD) cs225/catch/catchmain.cpp tests/tests.cpp Airport.cpp BFS.cpp Traversal.cpp Graph.cpp ShortestPathFinder.cpp $(LDFLAGS) -o test
 
 tests.o: tests/tests.cpp cs225/catch/catch.hpp Airport.h BFS.h Traversal.h Graph.h ShortestPathFinder.h
 	$(CXX) $(CXXFLAGS) tests/tests.cpp
+=======
+test: output_msg catch/catchmain.cpp tests/tests.cpp Airport.cpp BFS.cpp Traversal.cpp Graph.cpp ShortestPathFinder.cpp
+	$(LD) catch/catchmain.cpp tests/tests.cpp Airport.cpp BFS.cpp Traversal.cpp Graph.cpp ShortestPathFinder.cpp$(LDFLAGS) -o test
+>>>>>>> 7b11b2addc97c39367c60002c56b4fd5e2f7b03e
 
 clean:
 	-rm -f *.o $(EXENAME) test
