@@ -99,15 +99,21 @@ void ShortestPathFinder::readRouteData(string fileName) {
         // set edge weight as distance between source & dest
         Airport sourceLoc = airports[sourceID];
         Airport destLoc = airports[destID];
-        int dist = sqrt(pow(sourceLoc.getLatitude() - destLoc.getLatitude(), 2) + pow(sourceLoc.getLongitude() - destLoc.getLongitude(), 2));
+        
+        
+        double lon = destLoc.getLongitude() - sourceLoc.getLongitude();
+        double lat = destLoc.getLatitude() - sourceLoc.getLatitude();
+        
+        double dist = 2 * 6371 *
+                (asin(sqrt(pow(sin(lat / 2), 2) + cos(sourceLoc.getLatitude()) * cos(destLoc.getLatitude()) * pow(sin(lon / 2), 2))));
         graph_.setEdgeWeight(sourceID, destID, dist);
+        
     }
+    
     if (!infile.eof())
     {
         cerr << "Error\n";
     }
-    
-    graph_.print();
 }
 
 string ShortestPathFinder::closestAirport(map<string, int> distMap, map<string, bool> airportSet) 
@@ -126,7 +132,7 @@ string ShortestPathFinder::closestAirport(map<string, int> distMap, map<string, 
     return min_airport; 
 } 
 
-vector<Airport> ShortestPathFinder::getShortestPath(Airport start, Airport end) { 
+vector<Airport> ShortestPathFinder::getShortestPath(Airport start, Airport end) {
 
     vector<Airport> ret;
     map<string, int> distMap; 
@@ -160,7 +166,6 @@ vector<Airport> ShortestPathFinder::getShortestPath(Airport start, Airport end) 
     } 
 
     return ret;
-
 
 } 
 

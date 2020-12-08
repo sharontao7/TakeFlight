@@ -29,12 +29,12 @@ public:
 private:
     Graph graph_;
     map<string, Airport> airports;
-    // can replace pair w Airport class later to hold more var
-    // can also read airline data later to let user know what airline to take
     
     void readAirportData(string filename);      // initialize airports & vertices in graph
     void readRouteData(string filename);        // create edges iin graph
 
     vector<Airport> dijkstra(Airport start, Airport end);
     string closestAirport(map<string, int> distMap, map<string, bool> airportSet);
+    
+    vector<Airport> landmark(Airport start, Airport end);
 };
