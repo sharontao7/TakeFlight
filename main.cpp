@@ -8,13 +8,17 @@
 
 int main(/* int argc, const char * argv[]*/) {
     // TODO
-    /*
+    
     ShortestPathFinder spf("airports_sample.dat", "routes_sample.dat");
+    /*
     vector<Airport> path = spf.getShortestPath("1", "2");
     
     for (Airport airport : path) {
         std::cout << "Airport: " << airport.getName() << std::endl;
     }
+    */
+    
+    /*
     Graph testGraph = Graph(true);
     testGraph.insertVertex("Goroka Airport");
     testGraph.insertVertex("Madang Airport");
@@ -61,7 +65,7 @@ int main(/* int argc, const char * argv[]*/) {
 
     
 
-   ShortestPathFinder spf("airport_sample.dat", "routes_sample.dat");
+   //ShortestPathFinder spf("airport_sample.dat", "routes_sample.dat");
    spf.BFSTraversal("1");
     return 0;
 }

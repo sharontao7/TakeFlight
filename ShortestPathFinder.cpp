@@ -192,6 +192,12 @@ vector<Airport> ShortestPathFinder::BFSTraversal(Vertex start_) {
     std::cout << *it << std::endl;
      ++it;
     std::cout << *it << std::endl;
+     ++it;
+    std::cout << *it << std::endl;
+     ++it;
+    std::cout << *it << std::endl;
+     ++it;
+    std::cout << *it << std::endl;
 
     /*
     for(Traversal::Iterator it = bfs.begin();it != bfs.end(); ++it){
