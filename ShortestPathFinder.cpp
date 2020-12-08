@@ -5,6 +5,8 @@
 
 #include "ShortestPathFinder.h"
 #include "Graph.h"
+#include "BFS.h"
+#include "Traversal.h"
 
 ShortestPathFinder::ShortestPathFinder() : graph_(true, true) {
     readAirportData("airports.dat");
@@ -167,6 +169,36 @@ vector<Airport> ShortestPathFinder::getShortestPath(Vertex start, Vertex end) {
     } 
 
     return ret;
+}
+
+vector<Airport> ShortestPathFinder::BFSTraversal() {
+    Vertex start_ = "1";
+    BFS bfs(graph_, start_);
+
+    std::cout << "start: " << start_ << std::endl;
+    Traversal::Iterator it = bfs.begin();
+    ++it;
+    std::cout << *it << std::endl;
+    ++it;
+    std::cout << *it << std::endl;
+     ++it;
+    std::cout << *it << std::endl;
+     ++it;
+    std::cout << *it << std::endl;
+     ++it;
+    std::cout << *it << std::endl;
+     ++it;
+    std::cout << *it << std::endl;
+     ++it;
+    std::cout << *it << std::endl;
+     ++it;
+    std::cout << *it << std::endl;
+
+    /*
+    for(Traversal::Iterator it = bfs.begin();it != bfs.end(); ++it){
+        std::cout << "Airport: " << *it << std::endl;
+    }
+    */
 }
 
 vector<Airport> ShortestPathFinder::getLandmarkPath(Vertex start, Vertex end, Vertex toVisit) {

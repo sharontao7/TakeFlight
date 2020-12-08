@@ -11,12 +11,12 @@
 #include "Airport.h"
 #include "Graph.h"
 
-#include "ImageTraversal.h"
+#include "Traversal.h"
 
 using namespace cs225;
 
 /**
- * Initializes a breadth-first ImageTraversal on a given `png` image,
+ * Initializes a breadth-first Traversal on a given `png` image,
  * starting at `start`, and with a given `tolerance`.
  * @param png The image this BFS is going to traverse
  * @param start The start point of this BFS
@@ -24,7 +24,6 @@ using namespace cs225;
  * it will not be included in this BFS
  */
 BFS::BFS(const Graph & graph, const Vertex & start) {  
-  /** @todo [Part 1] */
   start_ = start;
   graph_ = graph;
   airports_.push(start_);
@@ -33,18 +32,17 @@ BFS::BFS(const Graph & graph, const Vertex & start) {
 /**
  * Returns an iterator for the traversal starting at the first point.
  */
-ImageTraversal::Iterator BFS::begin() {
-  /** @todo [Part 1] */
-  Iterator iterator_ = ImageTraversal::Iterator(graph_, start_, this);
+Traversal::Iterator BFS::begin() {
+  Iterator iterator_ = Traversal::Iterator(graph_, start_, this);
   return iterator_;
 }
 
 /**
  * Returns an iterator for the traversal one past the end of the traversal.
  */
-ImageTraversal::Iterator BFS::end() {
+Traversal::Iterator BFS::end() {
   /** @todo [Part 1] */
-  return ImageTraversal::Iterator();
+  return Traversal::Iterator();
 }
 
 /**

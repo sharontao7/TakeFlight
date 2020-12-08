@@ -1,5 +1,5 @@
 /**
- * @file ImageTraversal.h
+ * @file Traversal.h
  */
 #pragma once
 
@@ -14,7 +14,7 @@
 using namespace cs225;
 using namespace std;
 
-class ImageTraversal {
+class Traversal {
 public:
 //Really confused about graph. Are we iterating through Airports or Vertexes?
   class Iterator : std::iterator<std::forward_iterator_tag, Vertex> {
@@ -25,13 +25,13 @@ public:
     Vertex operator*();
     bool operator!=(const Iterator &other);
 
-    Iterator(Graph graph, Vertex start, ImageTraversal* traversal);
+    Iterator(Graph graph, Vertex start, Traversal* traversal);
 
   private:
     Graph graph_;
     Vertex start_;
     Vertex current_; 
-    ImageTraversal* traversal_;
+    Traversal* traversal_;
     bool isAtEnd_;
     map<Vertex,bool> visited;
   };

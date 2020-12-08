@@ -6,13 +6,13 @@
 #include "cs225/PNG.h"
 #include "Graph.h"
 
-#include "ImageTraversal.h"
+#include "Traversal.h"
 
 
 /**
  * Default iterator constructor.
  */
-ImageTraversal::Iterator::Iterator() {
+Traversal::Iterator::Iterator() {
   /** @todo [Part 1] */
   traversal_ = NULL;
   isAtEnd_ = true;
@@ -21,7 +21,7 @@ ImageTraversal::Iterator::Iterator() {
 /**
  * Custom iterator constructor.
  */
-ImageTraversal::Iterator::Iterator(Graph graph, Vertex start, ImageTraversal* traversal) {
+Traversal::Iterator::Iterator(Graph graph, Vertex start, Traversal* traversal) {
     graph_ = graph;
     start_ = start;
     traversal_ = traversal;
@@ -40,7 +40,7 @@ ImageTraversal::Iterator::Iterator(Graph graph, Vertex start, ImageTraversal* tr
  *
  * Advances the traversal of the image.
  */
-ImageTraversal::Iterator & ImageTraversal::Iterator::operator++() {
+Traversal::Iterator & Traversal::Iterator::operator++() {
   /** @todo [Part 1] */
   if(traversal_->empty()){
     isAtEnd_ = true;
@@ -81,9 +81,9 @@ ImageTraversal::Iterator & ImageTraversal::Iterator::operator++() {
 /**
  * Iterator accessor opreator.
  *
- * Accesses the current Point in the ImageTraversal.
+ * Accesses the current Point in the Traversal.
  */
-Vertex ImageTraversal::Iterator::operator*() {
+Vertex Traversal::Iterator::operator*() {
   /** @todo [Part 1] */
   return current_;
 }
@@ -93,7 +93,7 @@ Vertex ImageTraversal::Iterator::operator*() {
  *
  * Determines if two iterators are not equal.
  */
-bool ImageTraversal::Iterator::operator!=(const ImageTraversal::Iterator &other) {
+bool Traversal::Iterator::operator!=(const Traversal::Iterator &other) {
   /** @todo [Part 1] */
   bool thisIsEmpty = false;
   bool otherIsEmpty = false;

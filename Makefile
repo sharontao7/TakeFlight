@@ -1,5 +1,5 @@
 EXENAME = finalproj
-OBJS = Airport.o BFS.o ImageTraversal.o Graph.o ShortestPathFinder.o main.o
+OBJS = Airport.o BFS.o Traversal.o Graph.o ShortestPathFinder.o main.o
 
 CXX = clang++
 CXXFLAGS = $(CS225) -std=c++1y -stdlib=libc++ -c -g -O0 -Wall -Wextra -pedantic
@@ -39,8 +39,8 @@ Airport.o: Airport.cpp
 BFS.o: BFS.cpp 
 	$(CXX) $(CXXFLAGS) BFS.cpp 
 
-ImageTraversal.o: ImageTraversal.cpp 
-	$(CXX) $(CXXFLAGS) ImageTraversal.cpp
+Traversal.o: Traversal.cpp 
+	$(CXX) $(CXXFLAGS) Traversal.cpp
 
 Graph.o: random.cpp Graph.cpp
 	$(CXX) $(CXXFLAGS) Graph.cpp
@@ -48,8 +48,11 @@ Graph.o: random.cpp Graph.cpp
 ShortestPathFinder.o: ShortestPathFinder.cpp
 	$(CXX) $(CXXFLAGS) ShortestPathFinder.cpp
 
-test: output_msg catch/catchmain.cpp tests/tests.cpp Airport.cpp BFS.cpp ImageTraversal.cpp Graph.cpp ShortestPathFinder.cpp
-	$(LD) catch/catchmain.cpp tests/tests.cpp Airport.cpp BFS.cpp ImageTraversal.cpp Graph.cpp ShortestPathFinder.cpp$(LDFLAGS) -o test
+test: output_msg cs225/catch/catchmain.cpp tests/tests.cpp Airport.cpp BFS.cpp Traversal.cpp Graph.cpp ShortestPathFinder.cpp
+	$(LD) cs225/catch/catchmain.cpp tests/tests.cpp Airport.cpp BFS.cpp Traversal.cpp Graph.cpp ShortestPathFinder.cpp $(LDFLAGS) -o test
+
+tests.o: tests/tests.cpp cs225/catch/catch.hpp Airport.h BFS.h Traversal.h Graph.h ShortestPathFinder.h
+	$(CXX) $(CXXFLAGS) tests/tests.cpp
 
 clean:
 	-rm -f *.o $(EXENAME) test
