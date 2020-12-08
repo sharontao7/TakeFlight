@@ -62,12 +62,12 @@ void ShortestPathFinder::readAirportData(string fileName) {
     
     //graph_.print();
     
-    /*
+    
     // print dictionary
-    for (std::pair<string, std::pair<double, double>> airport : airports) {
-        std::cout << "Airport: " << airport.first << " " << airport.second.first << " " << airport.second.second << std::endl;
+    for (std::pair<string, Airport> airport : airports) {
+        std::cout << "Airport: " << airport.second.getName() << " " << airport.second.getLatitude() << " " << airport.second.getLongitude() << std::endl;
     }
-    */
+    
 }
 
 void ShortestPathFinder::readRouteData(string fileName) {
@@ -109,6 +109,7 @@ void ShortestPathFinder::readRouteData(string fileName) {
         graph_.setEdgeWeight(sourceID, destID, dist);
         
     }
+    graph_.print();
     
     if (!infile.eof())
     {
@@ -132,14 +133,14 @@ string ShortestPathFinder::closestAirport(map<string, int> distMap, map<string, 
     return min_airport; 
 } 
 
-vector<Airport> ShortestPathFinder::getShortestPath(Airport start, Airport end) {
+vector<Airport> ShortestPathFinder::getShortestPath(Vertex start, Vertex end) {
 
     vector<Airport> ret;
     map<string, int> distMap; 
     map<string, bool> airportSet;
 
     for (map<string, Airport>::iterator it = airports.begin(); it != airports.end(); it++) {
-        if (it->first == start.getName()) {
+        if (it->first == start) {
             distMap[it->first] = 0;
 
         } else {
@@ -166,6 +167,14 @@ vector<Airport> ShortestPathFinder::getShortestPath(Airport start, Airport end) 
     } 
 
     return ret;
+}
 
-} 
+vector<Airport> ShortestPathFinder::getLandmarkPath(Vertex start, Vertex end, Vertex toVisit) {
+
+    vector<Airport> ret;
+    
+    // use shortest path or bfs to find path from start to toVisit, toVisit to end & combine
+
+    return ret;
+}
 

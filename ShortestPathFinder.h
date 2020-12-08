@@ -19,12 +19,14 @@ public:
     /**
      * Dijkstra's algorithm
      */
-    vector<Airport> getShortestPath(Airport start, Airport end);
+    vector<Airport> getShortestPath(Vertex start, Vertex end);
     
     /**
      * Landmark path algorithm
      */
-    vector<Airport> getLandmarkPath(Airport start, Airport toVisit, Airport end);
+    vector<Airport> getLandmarkPath(Vertex start, Vertex end, Vertex toVisit);
+    
+    vector<Airport> BFSTraversal();
     
 private:
     Graph graph_;
@@ -33,8 +35,7 @@ private:
     void readAirportData(string filename);      // initialize airports & vertices in graph
     void readRouteData(string filename);        // create edges iin graph
 
-    vector<Airport> dijkstra(Airport start, Airport end);
     string closestAirport(map<string, int> distMap, map<string, bool> airportSet);
     
-    vector<Airport> landmark(Airport start, Airport end);
+    vector<Airport> bfs(Vertex start, Vertex end);
 };
