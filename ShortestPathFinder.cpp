@@ -33,16 +33,18 @@ void ShortestPathFinder::readAirportData(string fileName) {
         istringstream s(line);
         
         int infoNum = 0;
-        string ID;
+        string ID, name;
         double lat, lon;
         
         while (s) {
             string word;
             if (!getline(s, word, ',' ))
                 break;
-            if (infoNum == 0) {                     // ID = 0
+            if (infoNum == 0) {                     // ID
                 ID = word;
-            } else if (infoNum == 6) {              // latitude
+            } else if (infoNum == 1) {              // Name
+                name = word;
+            } else if (infoNum == 6) {               // latitude
                 stringstream lat_string(word);
                 lat_string >> lat;
             } else if (infoNum == 7) {              // longitude
@@ -52,7 +54,7 @@ void ShortestPathFinder::readAirportData(string fileName) {
             infoNum++;
         }
 
-        Airport airport = Airport(lat, lon, ID);
+        Airport airport = Airport(ID, name, lat, lon);
         airports[ID] = airport;
 
         if (!graph_.vertexExists(ID))
@@ -218,7 +220,7 @@ void ShortestPathFinder::BFSTraversal(Vertex start_) {
     cout << "BFS Traversal" << endl;
     
     for(Traversal::Iterator it = bfs.begin();it != bfs.end(); ++it){
-        cout << "Airport ID: " << *it << endl;
+        cout << "Airport: " << *it << " " << airports[*it].getName() << endl;
     }
 }
 

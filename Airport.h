@@ -29,21 +29,23 @@ using namespace std;
  * on a map. Also contains a public string 'name' to represent the name of the Airport. 
  */
 class Airport {
-    public: 
-        Airport(); 
-        Airport(double latitude, double longitude, string name); 
-
-        bool operator<(const Airport &other) const; 
-        bool operator==(const Airport &other) const; 
-
-        double getLatitude() const; 
-        double getLongitude() const;
-        string getName() const; 
-
-    private: 
-        double latitude_; 
-        double longitude_; 
-        string name_; 
+public:
+    Airport();
+    Airport(string ID, string name, double latitude, double longitude);
+    
+    bool operator<(const Airport &other) const;
+    bool operator==(const Airport &other) const;
+    
+    string getID() const;
+    string getName() const;
+    double getLatitude() const;
+    double getLongitude() const;
+    
+private:
+    string ID_;
+    string name_;
+    double latitude_;
+    double longitude_;
 }; 
 
 /**
@@ -55,7 +57,7 @@ class Airport {
  */
 inline std::ostream &operator<<(std::ostream &out, Airport const &airport)
 {
-    out << airport.getName() << ": " << airport.getLatitude() << ", " << airport.getLongitude();
+    out << airport.getID() << " " << airport.getName() << ": " << airport.getLatitude() << ", " << airport.getLongitude();
     return out;
 }; 
 
