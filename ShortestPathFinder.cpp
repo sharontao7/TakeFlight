@@ -176,35 +176,6 @@ void ShortestPathFinder::BFSTraversal(Vertex start_) {
 
     std::cout << "start: " << start_ << std::endl;
     
-    /*
-    Traversal::Iterator it = bfs.begin();
-    ++it;
-    std::cout << *it << std::endl;
-    ++it;
-    std::cout << *it << std::endl;
-    */
-    /*
-     ++it;
-    std::cout << *it << std::endl;
-     ++it;
-    std::cout << *it << std::endl;
-     ++it;
-    std::cout << *it << std::endl;
-     ++it;
-    std::cout << *it << std::endl;
-     ++it;
-    std::cout << *it << std::endl;
-     ++it;
-    std::cout << *it << std::endl;
-     ++it;
-    std::cout << *it << std::endl;
-     ++it;
-    std::cout << *it << std::endl;
-     ++it;
-    std::cout << *it << std::endl;
-    */
-
-    
     for(Traversal::Iterator it = bfs.begin();it != bfs.end(); ++it){
         std::cout << "Airport: " << *it << std::endl;
     }

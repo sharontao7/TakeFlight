@@ -30,9 +30,11 @@ public:
     
     void BFSTraversal(Vertex start);
     vector<Airport> BFSTraversal(Vertex start, Vertex end);
-    
-private:
+
     Graph graph_;
+
+private:
+    //Graph graph_;
     map<string, Airport> airports;
     
     void readAirportData(string filename);      // initialize airports & vertices in graph
