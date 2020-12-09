@@ -65,8 +65,6 @@ void ShortestPathFinder::readAirportData(string fileName) {
         cerr << "Error\n";
     }
     
-    //graph_.print();
-    
     /*
     // print dictionary
     for (std::pair<string, Airport> airport : airports) {
@@ -114,7 +112,6 @@ void ShortestPathFinder::readRouteData(string fileName) {
         graph_.setEdgeWeight(sourceID, destID, dist);
         
     }
-    //graph_.print();
     
     if (!infile.eof())
     {
@@ -122,20 +119,18 @@ void ShortestPathFinder::readRouteData(string fileName) {
     }
 }
 
-void ShortestPathFinder::BuildPath(map<string, string> &previous, string &dest, vector<Airport>& path) {
+void ShortestPathFinder::buildPath(map<string, string> &previous, string &dest, vector<Airport>& path) {
     // Base Case : If j is source
-
     if (previous[dest] == "*") {
         path.push_back(airports[dest]);
         return;
     }
  
-    BuildPath(previous, previous[dest], path);
+    buildPath(previous, previous[dest], path);
     path.push_back(airports[dest]);
 }
 
 string ShortestPathFinder::closestAirport(map<string, int> distMap, map<string, bool> airportSet) {
-    // Initialize min value
     int min = INT_MAX;
     string min_airport;
 
@@ -150,10 +145,9 @@ string ShortestPathFinder::closestAirport(map<string, int> distMap, map<string, 
 }
 
 void ShortestPathFinder::printPath(vector<Airport> &path) {
-    for (vector<Airport>::iterator it = path.begin(); it != path.end(); it++) {
-        cout << it->getName() << " ";
+    for (Airport airport : path) {
+        cout << airport.getID() << " " << airport.getName() << endl;
     }
-    cout << endl;
 }
 
 vector<Airport> ShortestPathFinder::getShortestPath(Vertex start, Vertex end) {
@@ -167,14 +161,13 @@ vector<Airport> ShortestPathFinder::getShortestPath(Vertex start, Vertex end) {
     airportSet[start] = false;
 
     for (map<string, Airport>::iterator it = airports.begin(); it != airports.end(); it++) {
-        //std::cout << "st " << it->first << std::endl;
-        //std::cout << "st " << it->second << std::endl;
         if (it->first != start) {
             distMap[it->first] = INT_MAX;
             airportSet[it->first] = false;
         }
     }
     
+    // iterate through all airports
     for (int i = 0; i < airports.size(); i++) {
         Vertex curr = closestAirport(distMap, airportSet);
         airportSet[curr] = true;
@@ -182,14 +175,12 @@ vector<Airport> ShortestPathFinder::getShortestPath(Vertex start, Vertex end) {
         if (curr == end)
             break;
         
-        // iterate through neighbors for all remaining airports
+        // iterate through neighbors for current airport
         vector<Vertex> neighbors = graph_.getAdjacent(curr);
         for (Vertex neighbor : neighbors) {
-            // get total distance from current airport to neighbor
-                // get distance between curr & neighbor and add the distance stored for current
-            // if this is less than the current distance stored
-            
             if (!airportSet[neighbor]) {
+                // get total distance from current airport to neighbor
+                // if this is less than the current distance stored, update distance value
                 int dist = graph_.getEdgeWeight(curr, neighbor) + distMap[curr];
                 if (dist < distMap[neighbor]) {
                     distMap[neighbor] = dist;
@@ -199,7 +190,7 @@ vector<Airport> ShortestPathFinder::getShortestPath(Vertex start, Vertex end) {
         }
     }
     
-    BuildPath(previous, end, path);
+    buildPath(previous, end, path);
     printPath(path);
     return path;
 

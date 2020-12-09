@@ -42,5 +42,5 @@ private:
 
     string closestAirport(map<string, int> distMap, map<string, bool> airportSet);
     void printPath(vector<Airport> &path);
-    void BuildPath(map<string, string> &previous, string &dest, vector<Airport>& path);
+    void buildPath(map<string, string> &previous, string &dest, vector<Airport>& path);
 };

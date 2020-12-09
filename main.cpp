@@ -24,7 +24,9 @@ int main(/* int argc, const char * argv[]*/) {
     /* for valgrind testing
     ShortestPathFinder spf("airports.dat", "routes.dat");
     spf.BFSTraversal("1");
-    spf.getShortestPath("1", "5");*/
+    spf.getShortestPath("1", "5");
+    spf.getLandmarkPath("1", "5", "2");
+    */
     
     int pickData;
     cout << "Enter 1 if you do not wish to use the default data files: ";
