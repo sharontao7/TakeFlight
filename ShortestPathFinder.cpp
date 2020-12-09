@@ -150,9 +150,13 @@ string ShortestPathFinder::closestAirport(map<string, int> distMap, map<string, 
 }
 
 void ShortestPathFinder::printPath(vector<Airport> &path) {
+    cout << endl << "Shortest Path (using Dijkstra's Algorithm):" << endl;
+    
     for (Airport airport : path) {
         cout << airport.getID() << " " << airport.getName() << endl;
     }
+    
+    cout << endl;
 }
 
 vector<Airport> ShortestPathFinder::getShortestPath(Vertex start, Vertex end) {
@@ -213,11 +217,13 @@ vector<Airport> ShortestPathFinder::getLandmarkPath(Vertex start, Vertex end, Ve
 void ShortestPathFinder::BFSTraversal(Vertex start_) {
     BFS bfs(graph_, start_);
 
-    cout << "BFS Traversal" << endl;
+    cout << endl << "BFS Traversal:" << endl;
     
     for(Traversal::Iterator it = bfs.begin();it != bfs.end(); ++it){
         cout << "Airport: " << *it << " " << airports[*it].getName() << endl;
     }
+    
+    cout << endl;
 }
 
 void ShortestPathFinder::printGraph() {
@@ -227,8 +233,12 @@ void ShortestPathFinder::printGraph() {
 void ShortestPathFinder::printNeighbors(Vertex airport) {
     vector<Vertex> neighbors = graph_.getAdjacent(airport);
     
+    cout << endl;
+    
     for (Vertex neighbor : neighbors) {
         cout << neighbor
              << " distance between: " << graph_.getEdgeWeight(airport, neighbor) << " km" << endl;
     }
+    
+    cout << endl;
 }
