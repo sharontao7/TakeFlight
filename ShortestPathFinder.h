@@ -39,4 +39,6 @@ private:
     void readRouteData(string filename);        // create edges iin graph
 
     string closestAirport(map<string, int> distMap, map<string, bool> airportSet);
+    void printPath(vector<Airport> &path);
+    void BuildPath(map<string, string> &previous, string &dest, vector<Airport>& path);
 };

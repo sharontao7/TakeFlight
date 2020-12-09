@@ -66,8 +66,10 @@ int main(/* int argc, const char * argv[]*/) {
 
     */
     
-   ShortestPathFinder spf("airports_sample.dat", "routes_sample.dat");
+   ShortestPathFinder spf("airports.dat", "routes.dat");
    spf.BFSTraversal("1");
+    
+    spf.getShortestPath("1", "2");
    
     return 0;
 
