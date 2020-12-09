@@ -31,5 +31,4 @@ private:
     Graph graph_;
     Vertex start_;
     std::queue<Vertex> airports_;
-    //bool * visited_;
 };

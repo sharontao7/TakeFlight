@@ -9,7 +9,7 @@
 int main(/* int argc, const char * argv[]*/) {
     // TODO
     
-    ShortestPathFinder spf("airports_sample.dat", "routes_sample.dat");
+    //ShortestPathFinder spf("airports_sample.dat", "routes_sample.dat");
     /*
     vector<Airport> path = spf.getShortestPath("1", "2");
     
@@ -58,14 +58,16 @@ int main(/* int argc, const char * argv[]*/) {
     std::cout << *it << std::endl;
     ++it;
     std::cout << *it << std::endl;   
-    */
+    
     //std::cout << bfs.pop() << std::endl; 
     //std::cout << bfs.pop() << std::endl; 
     //std::cout << bfs.pop() << std::endl;  
 
+    */
     
-
-   //ShortestPathFinder spf("airport_sample.dat", "routes_sample.dat");
+   ShortestPathFinder spf("airports_sample.dat", "routes_sample.dat");
    spf.BFSTraversal("1");
+   
     return 0;
+
 }

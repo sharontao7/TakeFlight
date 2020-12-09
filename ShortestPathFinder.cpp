@@ -51,7 +51,7 @@ void ShortestPathFinder::readAirportData(string fileName) {
             infoNum++;
         }
 
-        Airport airport = Airport(lat, lon, ID); 
+        Airport airport = Airport(lat, lon, ID);
         airports[ID] = airport;
 
         if (!graph_.vertexExists(ID))
@@ -175,35 +175,41 @@ vector<Airport> ShortestPathFinder::BFSTraversal(Vertex start_) {
     BFS bfs(graph_, start_);
 
     std::cout << "start: " << start_ << std::endl;
+    
+    /*
     Traversal::Iterator it = bfs.begin();
     ++it;
     std::cout << *it << std::endl;
     ++it;
     std::cout << *it << std::endl;
-     ++it;
-    std::cout << *it << std::endl;
-     ++it;
-    std::cout << *it << std::endl;
-     ++it;
-    std::cout << *it << std::endl;
-     ++it;
-    std::cout << *it << std::endl;
-     ++it;
-    std::cout << *it << std::endl;
-     ++it;
-    std::cout << *it << std::endl;
-     ++it;
-    std::cout << *it << std::endl;
-     ++it;
-    std::cout << *it << std::endl;
-     ++it;
-    std::cout << *it << std::endl;
-
+    */
     /*
+     ++it;
+    std::cout << *it << std::endl;
+     ++it;
+    std::cout << *it << std::endl;
+     ++it;
+    std::cout << *it << std::endl;
+     ++it;
+    std::cout << *it << std::endl;
+     ++it;
+    std::cout << *it << std::endl;
+     ++it;
+    std::cout << *it << std::endl;
+     ++it;
+    std::cout << *it << std::endl;
+     ++it;
+    std::cout << *it << std::endl;
+     ++it;
+    std::cout << *it << std::endl;
+    */
+
+    
     for(Traversal::Iterator it = bfs.begin();it != bfs.end(); ++it){
         std::cout << "Airport: " << *it << std::endl;
     }
-    */
+    
+    
 }
 
 vector<Airport> ShortestPathFinder::getLandmarkPath(Vertex start, Vertex end, Vertex toVisit) {

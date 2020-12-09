@@ -28,7 +28,8 @@ Traversal::Iterator::Iterator(Graph graph, Vertex start, Traversal* traversal) {
     isAtEnd_ = false;
     //need to resolve Vertex vs Airport Issue
     current_ = traversal_->peek();
-    for(unsigned x = 0; x < graph.getVertices().size(); x++){
+    vector<Vertex> vertices = graph.getVertices();
+    for(unsigned x = 0; x < vertices.size(); x++){
         Vertex currVert = graph.getVertices().at(x);
         visited.insert(pair<Vertex, bool>(currVert, false));
     }
@@ -64,8 +65,14 @@ Traversal::Iterator & Traversal::Iterator::operator++() {
     //check if the neighbour vertex has not been visited, add to the traversal if it hasn't
     for(int i = 0; i < (int)neighbours.size(); i++){
       Vertex currVert = neighbours.at(i);
+      /*
       map<Vertex,bool>::iterator it = visited.find(currVert);
       if(it != visited.end()){
+        traversal_->add(currVert);
+      }
+      */
+
+      if(!visited[currVert]){
         traversal_->add(currVert);
       }
     }
