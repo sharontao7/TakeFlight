@@ -2,6 +2,7 @@
 #include <iostream>
 #include <sstream>
 #include <string>
+#include <queue>
 
 #include "ShortestPathFinder.h"
 #include "Graph.h"
@@ -111,7 +112,7 @@ void ShortestPathFinder::readRouteData(string fileName) {
         graph_.setEdgeWeight(sourceID, destID, dist);
         
     }
-    graph_.print();
+    //graph_.print();
     
     if (!infile.eof())
     {
@@ -129,7 +130,6 @@ void ShortestPathFinder::BuildPath(map<string, string> &previous, string &dest, 
  
     BuildPath(previous, previous[dest], path);
     path.push_back(airports[dest]);
-    cout << "push " << dest << endl;
 }
 
 string ShortestPathFinder::closestAirport(map<string, int> distMap, map<string, bool> airportSet) {
@@ -159,60 +159,48 @@ vector<Airport> ShortestPathFinder::getShortestPath(Vertex start, Vertex end) {
     map<string, int> distMap;
     map<string, bool> airportSet;
     map<string, string> previous;
+    
+    distMap[start] = 0;
+    previous[start] = "*";
+    airportSet[start] = false;
 
     for (map<string, Airport>::iterator it = airports.begin(); it != airports.end(); it++) {
         //std::cout << "st " << it->first << std::endl;
         //std::cout << "st " << it->second << std::endl;
-        if (it->first == start) {
-            distMap[it->first] = 0;
-            previous[it->first] = "*";
-           
-        } else {
+        if (it->first != start) {
             distMap[it->first] = INT_MAX;
+            airportSet[it->first] = false;
         }
-        airportSet[it->first] = false;
     }
-   
-    // Find shortest path for all vertices
-    for (unsigned long count = 0; count < airports.size() - 1; count++) {
-        // Pick the minimum distance vertex from the set of vertices not yet processed
-        string closest = closestAirport(distMap, airportSet);
-
-        // Mark the picked vertex as processed
-        airportSet[closest] = true;
-       
-        std::cout << "closest " << closest << std::endl;
-        // Update dist value of the adjacent vertices of the picked vertex.
-        for (map<string, Airport>::iterator it = airports.begin(); it != airports.end(); it++) {
-            if (graph_.edgeExists(closest, it->first)) {
-                if (!airportSet[it->first] && graph_.getEdgeWeight(closest, it->first) && distMap[closest] != INT_MAX
-                    && distMap[closest] + graph_.getEdgeWeight(closest, it->first) < distMap[it->first]) {
-                    distMap[it->first] = distMap[closest] + graph_.getEdgeWeight(closest, it->first);
-                    previous[it->first] = closest;
-                    cout << "update " << it->first << " previous " << closest << endl;
+    
+    for (int i = 0; i < airports.size(); i++) {
+        Vertex curr = closestAirport(distMap, airportSet);
+        airportSet[curr] = true;
+        
+        if (curr == end)
+            break;
+        
+        // iterate through neighbors for all remaining airports
+        vector<Vertex> neighbors = graph_.getAdjacent(curr);
+        for (Vertex neighbor : neighbors) {
+            // get total distance from current airport to neighbor
+                // get distance between curr & neighbor and add the distance stored for current
+            // if this is less than the current distance stored
+            
+            if (!airportSet[neighbor]) {
+                int dist = graph_.getEdgeWeight(curr, neighbor) + distMap[curr];
+                if (dist < distMap[neighbor]) {
+                    distMap[neighbor] = dist;
+                    previous[neighbor] = curr;
                 }
             }
-           
         }
     }
-
+    
     BuildPath(previous, end, path);
     printPath(path);
     return path;
 
-}
-
-
-void ShortestPathFinder::BFSTraversal(Vertex start_) {
-    BFS bfs(graph_, start_);
-
-    std::cout << "start: " << start_ << std::endl;
-    
-    for(Traversal::Iterator it = bfs.begin();it != bfs.end(); ++it){
-        std::cout << "Airport: " << *it << std::endl;
-    }
-    
-    
 }
 
 vector<Airport> ShortestPathFinder::getLandmarkPath(Vertex start, Vertex end, Vertex toVisit) {
@@ -224,3 +212,12 @@ vector<Airport> ShortestPathFinder::getLandmarkPath(Vertex start, Vertex end, Ve
     return ret;
 }
 
+void ShortestPathFinder::BFSTraversal(Vertex start_) {
+    BFS bfs(graph_, start_);
+
+    std::cout << "BFS Traversal" << std::endl;
+    
+    for(Traversal::Iterator it = bfs.begin();it != bfs.end(); ++it){
+        std::cout << "Airport: " << *it << std::endl;
+    }
+}

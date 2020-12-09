@@ -7,69 +7,80 @@
 #include "Traversal.h"
 #include "Graph.h"
 
+void printInstructions() {
+    cout << "Options:" << endl;
+    cout << "0 - Quit" << endl;
+    cout << "1 - BFS" << endl;
+    cout << "2 - Shortest Path (Dijkstra)" << endl;
+    cout << "3 - Landmark Path" << endl;
+    cout << "4 - Print Graph" << endl;
+    cout << "5 - Print Neighbors" << endl;
+    cout << "6 - Help" << endl;
+}
+
 int main(/* int argc, const char * argv[]*/) {
     // TODO
     
-    //ShortestPathFinder spf("airports_sample.dat", "routes_sample.dat");
-    /*
-    vector<Airport> path = spf.getShortestPath("1", "2");
+    /* for valgrind testing
+    ShortestPathFinder spf("airports.dat", "routes.dat");
+    spf.BFSTraversal("1");
+    spf.getShortestPath("1", "5");*/
     
-    for (Airport airport : path) {
-        std::cout << "Airport: " << airport.getName() << std::endl;
-    }
-    */
+    int pickData;
+    cout << "Enter 1 if you do not wish to use the default data files: "
+    cin >> pickData;
     
-    /*
-    Graph testGraph = Graph(true);
-    testGraph.insertVertex("Goroka Airport");
-    testGraph.insertVertex("Madang Airport");
-    testGraph.insertVertex("Mount Hagen Kagamuga Airport");
-    testGraph.insertVertex("Nadzab Airport");
-    testGraph.insertVertex("Port Moresby Jacksons International Airport"); 
-    testGraph.insertVertex("Wewak International Airport");
-    testGraph.insertVertex("Narsarsuaq Airport");
-
-    testGraph.insertEdge("Goroka Airport", "Madang Airport");
-    testGraph.insertEdge("Madang Airport", "Wewak International Airport");
-    testGraph.insertEdge("Goroka Airport", "Port Moresby Jacksons International Airport");
-    testGraph.insertEdge("Port Moresby Jacksons International Airport", "Narsarsuaq Airport");
-    testGraph.insertEdge("Goroka Airport", "Mount Hagen Kagamuga Airport");
-    testGraph.insertEdge("Mount Hagen Kagamuga Airport", "Nadzab Airport");
-
-    Vertex startingVertex("Goroka Airport");
-    BFS bfs(testGraph, startingVertex);
-
-    //bfs.add( Vertex("Madang Airport"));
-    //bfs.add( Vertex("Port Moresby Jacksons International Airport"));
-    //bfs.add( Vertex("Mount Hagen Kagamuga Airport"));
-    for(Traversal::Iterator it = bfs.begin();it != bfs.end(); ++it){
-        std::cout << "Airport: " << *it << std::endl;
+    string airportFile, routeFile;
+    if (pickData == 1) {
+        cout << "Enter airport file name: ";
+        cin >> airportFile;
+        cout << "Enter route file name: ";
+        cin >> routeFile;
+    } else {
+        airportFile = "airports_sample.dat";
+        routeFile = "routes_sample.dat";
     }
     
-    Traversal::Iterator it = bfs.begin();
-    ++it;
-    std::cout << *it << std::endl;
-    ++it;
-    std::cout << *it << std::endl;
-    ++it;
-    std::cout << *it << std::endl;
-    ++it;
-    std::cout << *it << std::endl;
-    ++it;
-    std::cout << *it << std::endl;
-    ++it;
-    std::cout << *it << std::endl;   
+    ShortestPathFinder spf(airportFile, routeFile);
     
-    //std::cout << bfs.pop() << std::endl; 
-    //std::cout << bfs.pop() << std::endl; 
-    //std::cout << bfs.pop() << std::endl;  
-
-    */
+    int input = -1;
+    printInstructions();
     
-   ShortestPathFinder spf("airports_sample.dat", "routes_sample.dat");
-   spf.BFSTraversal("1");
-    
-    spf.getShortestPath("1", "2");
+    while (input != 0) {
+        cout << "Enter action # here: ";
+        cin >> input;
+        
+        if (input == 1) {           // BFS Traversal
+            string start;
+            cout << "Enter starting airport ID: ";
+            cin >> start;
+            spf.BFSTraversal(start);
+        } else if (input == 2) {    // Shortest Path (Dijkstra)
+            string start, end;
+            cout << "Enter starting airport ID: ";
+            cin >> start;
+            cout << "Enter destination airport ID: ";
+            cin >> end;
+            spf.getShortestPath(start, end);
+        } else if (input == 3) {    // Landmark Path
+            string start, end, landmark;
+            cout << "Enter starting airport ID: ";
+            cin >> start;
+            cout << "Enter destination airport ID: ";
+            cin >> end;
+            cout << "Enter landmark airport ID: ";
+            cin >> landmark;
+            spf.getLandmarkPath(start, end, landmark);
+        } else if (input == 4) {    // Print Graph
+            
+        } else if (input == 5) {    // Print Neighbors
+            
+        } else if (input == 6) {    // Print Instructions
+            printInstructions();
+        } else if (input != 0) {    // Check for valid input
+            cout << "Please enter a valid action #." << endl;
+        }
+    }
    
     return 0;
 

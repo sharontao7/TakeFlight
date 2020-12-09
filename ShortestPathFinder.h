@@ -29,7 +29,9 @@ public:
     vector<Airport> getLandmarkPath(Vertex start, Vertex end, Vertex toVisit);
     
     void BFSTraversal(Vertex start);
-    vector<Airport> BFSTraversal(Vertex start, Vertex end);
+    
+    void printGraph();
+    void printNeighbor(Vertex airport);
 
     Graph graph_;
 
