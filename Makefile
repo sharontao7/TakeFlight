@@ -21,7 +21,7 @@ else
 CLANG_VERSION_MSG = $(warning $(ccyellow) Looks like you are not on EWS. Be sure to test on EWS before the deadline. $(ccend))
 endif
 
-.PHONY: all test clean output_msg
+.PHONY: output_msg
 
 all : $(EXENAME)
 
@@ -30,28 +30,28 @@ output_msg: ; $(CLANG_VERSION_MSG)
 $(EXENAME): output_msg $(OBJS)
 	$(LD) $(OBJS) $(LDFLAGS) -o $(EXENAME)
 
-main.o: main.cpp
+main.o: main.cpp ShortestPathFinder.h BFS.h Traversal.h Airport.h Graph.h random.h
 	$(CXX) $(CXXFLAGS) main.cpp
 
-Airport.o: Airport.cpp
-	$(CXX) $(CXXFLAGS) Airport.cpp
-
-BFS.o: BFS.cpp 
-	$(CXX) $(CXXFLAGS) BFS.cpp 
-
-Traversal.o: Traversal.cpp 
-	$(CXX) $(CXXFLAGS) Traversal.cpp
-
-Graph.o: random.cpp Graph.cpp
-	$(CXX) $(CXXFLAGS) Graph.cpp
-
-ShortestPathFinder.o: ShortestPathFinder.cpp
+ShortestPathFinder.o: ShortestPathFinder.cpp ShortestPathFinder.h BFS.h Traversal.h Airport.h Graph.h random.h
 	$(CXX) $(CXXFLAGS) ShortestPathFinder.cpp
 
-test: output_msg cs225/catch/catchmain.cpp tests/tests.cpp Airport.cpp BFS.cpp Traversal.cpp Graph.cpp ShortestPathFinder.cpp
-	$(LD) cs225/catch/catchmain.cpp tests/tests.cpp Airport.cpp BFS.cpp Traversal.cpp Graph.cpp ShortestPathFinder.cpp $(LDFLAGS) -o test
+BFS.o: BFS.cpp BFS.h Traversal.h
+	$(CXX) $(CXXFLAGS) BFS.cpp 
 
-tests.o: tests/tests.cpp cs225/catch/catch.hpp Airport.h BFS.h Traversal.h Graph.h ShortestPathFinder.h
+Traversal.o: Traversal.cpp Traversal.h Graph.h
+	$(CXX) $(CXXFLAGS) Traversal.cpp
+
+Graph.o: Graph.cpp Graph.h random.cpp
+	$(CXX) $(CXXFLAGS) Graph.cpp
+
+Airport.o: Airport.cpp Airport.h
+	$(CXX) $(CXXFLAGS) Airport.cpp
+
+test: output_msg tests.o Airport.o BFS.o Traversal.o Graph.o ShortestPathFinder.o
+	$(LD) tests.o Airport.o BFS.o Traversal.o Graph.o ShortestPathFinder.o $(LDFLAGS) -o test
+
+tests.o: tests/tests.cpp cs225/catch/catch.hpp Airport.h BFS.h Traversal.h Graph.h ShortestPathFinder.h Graph.h 
 	$(CXX) $(CXXFLAGS) tests/tests.cpp
 
 clean:

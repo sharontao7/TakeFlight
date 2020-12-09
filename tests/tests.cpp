@@ -6,12 +6,10 @@
 #include <string>
 #include <vector>
 
-#include "../cs225/PNG.h"
-#include "../cs225/HSLAPixel.h"
-
 #include "../BFS.h"
 #include "../Traversal.h"
 #include "../ShortestPathFinder.h"
+#include "../Airport.h"
 
 using namespace cs225;
 
@@ -42,3 +40,7 @@ TEST_CASE("BFS maintains the correct point on top", "[weight=0][part=1][part=1a]
 
   REQUIRE( bfs.peek() == Vertex("Goroka Airport") );
 }
+
+
+
+

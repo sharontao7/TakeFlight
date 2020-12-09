@@ -5,6 +5,7 @@
 #include "Airport.h"
 #include "BFS.h"
 #include "Traversal.h"
+#include "Graph.h"
 
 int main(/* int argc, const char * argv[]*/) {
     // TODO

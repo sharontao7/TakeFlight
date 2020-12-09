@@ -171,7 +171,7 @@ vector<Airport> ShortestPathFinder::getShortestPath(Vertex start, Vertex end) {
     return ret;
 }
 
-vector<Airport> ShortestPathFinder::BFSTraversal(Vertex start_) {
+void ShortestPathFinder::BFSTraversal(Vertex start_) {
     BFS bfs(graph_, start_);
 
     std::cout << "start: " << start_ << std::endl;

@@ -28,7 +28,7 @@ public:
      */
     vector<Airport> getLandmarkPath(Vertex start, Vertex end, Vertex toVisit);
     
-    vector<Airport> BFSTraversal(Vertex start);
+    void BFSTraversal(Vertex start);
     vector<Airport> BFSTraversal(Vertex start, Vertex end);
     
 private:
