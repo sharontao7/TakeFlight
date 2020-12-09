@@ -36,6 +36,7 @@ void ShortestPathFinder::readAirportData(string fileName) {
         string ID, name;
         double lat, lon;
         
+        // read in ID, name, lat, lon
         while (s) {
             string word;
             if (!getline(s, word, ',' ))
@@ -54,15 +55,17 @@ void ShortestPathFinder::readAirportData(string fileName) {
             infoNum++;
         }
 
+        // create new Airport obj and add to airports
         Airport airport = Airport(ID, name, lat, lon);
         airports[ID] = airport;
 
+        // insert airport ID as vertex into graph
         if (!graph_.vertexExists(ID))
             graph_.insertVertex(ID);
     }
     if (!infile.eof())
     {
-        cerr << "Error\n";
+        cerr << "Airports data file could not be read.\nPlease enter 0 to exit the program.\n";
     }
     
     /*
@@ -85,6 +88,7 @@ void ShortestPathFinder::readRouteData(string fileName) {
         int infoNum = 0;
         string sourceID, destID;
         
+        // read in sourceID, destID for airports
         while (s) {
             string word;
             if (!getline(s, word, ',' ))
@@ -97,13 +101,14 @@ void ShortestPathFinder::readRouteData(string fileName) {
             infoNum++;
         }
         
+        // insert edge between source & destination vertices in graph
         graph_.insertEdge(sourceID, destID);
         
-        // set edge weight as distance between source & dest
+        // calculate dist between source & dest
+        // set as edge weight
         Airport sourceLoc = airports[sourceID];
         Airport destLoc = airports[destID];
-        
-        
+    
         double lon = destLoc.getLongitude() - sourceLoc.getLongitude();
         double lat = destLoc.getLatitude() - sourceLoc.getLatitude();
         
@@ -115,7 +120,7 @@ void ShortestPathFinder::readRouteData(string fileName) {
     
     if (!infile.eof())
     {
-        cerr << "Error\n";
+        cerr << "Routes data file could not be read.\nPlease enter 0 to exit the program.\n";
     }
 }
 
