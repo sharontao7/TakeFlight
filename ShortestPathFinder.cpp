@@ -161,55 +161,66 @@ void ShortestPathFinder::printPath(vector<Airport> &path) {
 
 vector<Airport> ShortestPathFinder::getShortestPath(Vertex start, Vertex end) {
     vector<Airport> path;
+    bool destReached = false;
+    
+    // queue stores remaining airports, ordered by distance
+    priority_queue<pair<int, string>, vector<pair<int, string>>, greater<pair<int, string>>> airportQueue;
     map<string, int> distMap;
-    map<string, bool> airportSet;
     map<string, string> previous;
     
+    // insert starting airport into queue
+    airportQueue.emplace(0, start);
     distMap[start] = 0;
     previous[start] = "*";
-    airportSet[start] = false;
-
+    
+    // initialize all starting distances (other than starting airport) to "infinity"
+    // parents are undefined for now
     for (map<string, Airport>::iterator it = airports.begin(); it != airports.end(); it++) {
         if (it->first != start) {
             distMap[it->first] = INT_MAX;
-            airportSet[it->first] = false;
+            previous[it->first] = "";
         }
     }
     
-    // iterate through all airports
-    for (int i = 0; i < airports.size(); i++) {
-        Vertex curr = closestAirport(distMap, airportSet);
-        airportSet[curr] = true;
+    while (!airportQueue.empty()) {
+        pair<int, string> curr = airportQueue.top();
+        airportQueue.pop();
         
-        if (curr == end)
+        // end if destination airport has been found & accounted for already
+        if (curr.second == end) {
+            destReached = true;
             break;
+        }
         
         // iterate through neighbors for current airport
-        vector<Vertex> neighbors = graph_.getAdjacent(curr);
+        vector<Vertex> neighbors = graph_.getAdjacent(curr.second);
         for (Vertex neighbor : neighbors) {
-            if (!airportSet[neighbor]) {
-                // get total distance from current airport to neighbor
-                // if this is less than the current distance stored, update distance value
-                int dist = graph_.getEdgeWeight(curr, neighbor) + distMap[curr];
-                if (dist < distMap[neighbor]) {
-                    distMap[neighbor] = dist;
-                    previous[neighbor] = curr;
-                }
+            // get total distance from current airport to neighbor
+            // if this is less than the current distance stored, insert into queue
+            int dist = graph_.getEdgeWeight(curr.second, neighbor) + curr.first;
+            if (dist < distMap[neighbor]) {
+                distMap[neighbor] = dist;
+                previous[neighbor] = curr.second;
+                airportQueue.emplace(dist, neighbor);
             }
         }
     }
     
-    buildPath(previous, end, path);
-    printPath(path);
+    if (destReached) {
+        buildPath(previous, end, path);
+        printPath(path);
+    } else {
+        cout << "No path from " << start << " to " << end << " found." << endl;
+    }
+    
     return path;
-
 }
 
 vector<Airport> ShortestPathFinder::getLandmarkPath(Vertex start, Vertex end, Vertex toVisit) {
 
     vector<Airport> ret;
     
-    // use shortest path or bfs to find path from start to toVisit, toVisit to end & combine
+    // use dijkstra to find path from start to toVisit, toVisit to end & combine
 
     return ret;
 }

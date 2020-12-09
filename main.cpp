@@ -21,13 +21,13 @@ void printInstructions() {
 int main(/* int argc, const char * argv[]*/) {
     // TODO
     
-    /* for valgrind testing
+    // for valgrind testing
     ShortestPathFinder spf("airports.dat", "routes.dat");
-    spf.BFSTraversal("1");
-    spf.getShortestPath("1", "5");
-    spf.getLandmarkPath("1", "5", "2");
-    */
+    //spf.BFSTraversal("1");
+    spf.getShortestPath("1", "1000");
+    //spf.getLandmarkPath("1", "5", "2");
     
+    /*
     int pickData;
     cout << "Enter 1 if you do not wish to use the default data files: ";
     cin >> pickData;
@@ -57,6 +57,7 @@ int main(/* int argc, const char * argv[]*/) {
             cout << "Enter starting airport ID: ";
             cin >> start;
             spf.BFSTraversal(start);
+            
         } else if (input == 2) {    // Shortest Path (Dijkstra)
             string start, end;
             cout << "Enter starting airport ID: ";
@@ -64,6 +65,7 @@ int main(/* int argc, const char * argv[]*/) {
             cout << "Enter destination airport ID: ";
             cin >> end;
             spf.getShortestPath(start, end);
+            
         } else if (input == 3) {    // Landmark Path
             string start, end, landmark;
             cout << "Enter starting airport ID: ";
@@ -73,20 +75,24 @@ int main(/* int argc, const char * argv[]*/) {
             cout << "Enter landmark airport ID: ";
             cin >> landmark;
             spf.getLandmarkPath(start, end, landmark);
+            
         } else if (input == 4) {    // Print Graph
             spf.printGraph();
+            
         } else if (input == 5) {    // Print Neighbors
             string airportID;
             cout << "Enter desired airport ID: ";
             cin >> airportID;
             spf.printNeighbors(airportID);
+            
         } else if (input == 6) {    // Print Instructions
             printInstructions();
+            
         } else if (input != 0) {    // Check for valid input
             cout << "Please enter a valid action #." << endl;
         }
     }
-   
+   */
     return 0;
 
 }
