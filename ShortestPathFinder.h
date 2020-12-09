@@ -31,12 +31,10 @@ public:
     void BFSTraversal(Vertex start);
     
     void printGraph();
-    void printNeighbor(Vertex airport);
-
-    Graph graph_;
+    void printNeighbors(Vertex airport);
 
 private:
-    //Graph graph_;
+    Graph graph_;
     map<string, Airport> airports;
     
     void readAirportData(string filename);      // initialize airports & vertices in graph

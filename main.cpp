@@ -27,7 +27,7 @@ int main(/* int argc, const char * argv[]*/) {
     spf.getShortestPath("1", "5");*/
     
     int pickData;
-    cout << "Enter 1 if you do not wish to use the default data files: "
+    cout << "Enter 1 if you do not wish to use the default data files: ";
     cin >> pickData;
     
     string airportFile, routeFile;
@@ -72,9 +72,12 @@ int main(/* int argc, const char * argv[]*/) {
             cin >> landmark;
             spf.getLandmarkPath(start, end, landmark);
         } else if (input == 4) {    // Print Graph
-            
+            spf.printGraph();
         } else if (input == 5) {    // Print Neighbors
-            
+            string airportID;
+            cout << "Enter desired airport ID: ";
+            cin >> airportID;
+            spf.printNeighbors(airportID);
         } else if (input == 6) {    // Print Instructions
             printInstructions();
         } else if (input != 0) {    // Check for valid input

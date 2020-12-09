@@ -215,9 +215,22 @@ vector<Airport> ShortestPathFinder::getLandmarkPath(Vertex start, Vertex end, Ve
 void ShortestPathFinder::BFSTraversal(Vertex start_) {
     BFS bfs(graph_, start_);
 
-    std::cout << "BFS Traversal" << std::endl;
+    cout << "BFS Traversal" << endl;
     
     for(Traversal::Iterator it = bfs.begin();it != bfs.end(); ++it){
-        std::cout << "Airport: " << *it << std::endl;
+        cout << "Airport ID: " << *it << endl;
+    }
+}
+
+void ShortestPathFinder::printGraph() {
+    graph_.print();
+}
+
+void ShortestPathFinder::printNeighbors(Vertex airport) {
+    vector<Vertex> neighbors = graph_.getAdjacent(airport);
+    
+    for (Vertex neighbor : neighbors) {
+        cout << neighbor
+             << " distance between: " << graph_.getEdgeWeight(airport, neighbor) << " km" << endl;
     }
 }
