@@ -43,6 +43,7 @@ private:
     
     void readAirportData(string filename);      // initialize airports & vertices in graph
     void readRouteData(string filename);        // create edges in graph
+    int calculateDistance(Vertex start, Vertex end);
 
     void buildPath(map<string, string> &previous, string &dest, vector<Airport>& path);
     vector<Airport> buildLandmarkPath(vector<Airport> pathA, vector<Airport> pathB);

@@ -61,7 +61,7 @@ private:
  */
 inline std::ostream &operator<<(std::ostream &out, Airport const &airport)
 {
-    out << airport.getID() << " " << airport.getName() << ": " << airport.getLatitude() << ", " << airport.getLongitude();
+    out << airport.getID() << " " << airport.getName() << " at " << airport.getLatitude() << ", " << airport.getLongitude();
     return out;
 }; 
 

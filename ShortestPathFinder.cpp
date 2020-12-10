@@ -27,6 +27,26 @@ ShortestPathFinder::~ShortestPathFinder() {
     airports.clear();
 }
 
+int ShortestPathFinder::calculateDistance(Vertex start, Vertex end) {
+    Airport sourceLoc = airports[start];
+    Airport destLoc = airports[end];
+    
+    // convert decimal lat/lon values to radians
+    double lat1 = (M_PI * sourceLoc.getLatitude()) / 180;
+    double lat2 = (M_PI * destLoc.getLatitude()) / 180;
+    double lon1 = (M_PI * sourceLoc.getLongitude()) / 180;
+    double lon2 = (M_PI * destLoc.getLongitude()) / 180;
+    
+    // get delta lat & delta lon
+    double dLat = lat2 - lat1;
+    double dLon = lon2 - lon1;
+    
+    double dist = pow(sin(dLat / 2), 2) + cos(lat1) * cos(lat2) * pow(sin(dLon / 2), 2);
+    dist = 2 * 6371 * asin(sqrt(dist));
+    
+    return (int) dist;
+}
+
 void ShortestPathFinder::readAirportData(string fileName) {
     ifstream infile(fileName);
     
@@ -109,16 +129,8 @@ void ShortestPathFinder::readRouteData(string fileName) {
         if (graph_.vertexExists(sourceID) && graph_.vertexExists(destID)) {
             graph_.insertEdge(sourceID, destID);
             
-            // calculate dist between source & dest
-            // set as edge weight
-            Airport sourceLoc = airports[sourceID];
-            Airport destLoc = airports[destID];
-        
-            double lon = destLoc.getLongitude() - sourceLoc.getLongitude();
-            double lat = destLoc.getLatitude() - sourceLoc.getLatitude();
-            
-            double dist = 2 * 6371 *
-                    (asin(sqrt(pow(sin(lat / 2), 2) + cos(sourceLoc.getLatitude()) * cos(destLoc.getLatitude()) * pow(sin(lon / 2), 2))));
+            // set distance between source & dest as edge weight
+            int dist = calculateDistance(sourceID, destID);
             graph_.setEdgeWeight(sourceID, destID, dist);
         }
         
@@ -316,8 +328,8 @@ void ShortestPathFinder::printNeighbors(Vertex airport) {
     cout << endl;
     
     for (Vertex neighbor : neighbors) {
-        cout << neighbor
-             << " distance between: " << graph_.getEdgeWeight(airport, neighbor) << " km" << endl;
+        cout << airports[neighbor]
+             << " is " << graph_.getEdgeWeight(airport, neighbor) << " km away." << endl;
     }
     
     cout << endl;
