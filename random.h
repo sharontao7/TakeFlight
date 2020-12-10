@@ -6,6 +6,8 @@
  *
  * @author Sean Massung
  * @date Spring 2011
+ *
+ * Sourced from lab_ml, CS 225 FA 20
  */
 
 #pragma once

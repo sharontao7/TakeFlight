@@ -1,6 +1,8 @@
 /**
  * @file Traversal.h
+ * Based on ImageTraversal.h from mp_traversals, CS 225 FA 20
  */
+
 #pragma once
 
 #include <iterator>

@@ -1,4 +1,8 @@
-// taken from lab_ml
+/**
+ * @file Graph.h
+ * Sourced from lab_ml, CS 225 FA 20
+ */
+
 #pragma once
 
 #include <list>

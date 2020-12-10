@@ -1,3 +1,8 @@
+/**
+ * @file Traversal.cpp
+ * Based on ImageTraversal.cpp from mp_traversals, CS 225 FA 20
+ */
+
 #include <cmath>
 #include <iterator>
 #include <iostream>
@@ -5,7 +10,6 @@
 #include "cs225/HSLAPixel.h"
 #include "cs225/PNG.h"
 #include "Graph.h"
-
 #include "Traversal.h"
 
 

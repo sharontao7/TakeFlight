@@ -1,4 +1,7 @@
-// taken from lab_ml
+/**
+ * @file Graph.cpp
+ * Sourced from lab_ml, CS 225 FA 20
+ */
 
 #include "Graph.h"
 

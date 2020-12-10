@@ -1,6 +1,7 @@
 /**
  * @file random.cpp
  * Random library implementation.
+ * Sourced from lab_ml, CS 225 FA 20
  */
 
 /**

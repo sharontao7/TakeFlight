@@ -1,16 +1,19 @@
-#include "BFS.h"
+/**
+ * @file BFS.cpp
+ * Based on BFS.cpp from mp_traversals, CS 225 FA 20
+*/
+
 #include <iterator>
 #include <cmath>
-
 #include <list>
 #include <queue>
 #include <stack>
 #include <vector>
 
+#include "BFS.h"
 #include "cs225/PNG.h"
 #include "Airport.h"
 #include "Graph.h"
-
 #include "Traversal.h"
 
 using namespace cs225;

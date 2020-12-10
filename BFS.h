@@ -1,5 +1,6 @@
 /**
-* @file BFS.h
+ * @file BFS.h
+ * Based on BFS.h from mp_traversals, CS 225 FA 20
 */
 
 #pragma once
