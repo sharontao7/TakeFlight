@@ -1,4 +1,4 @@
-EXENAME = finalproj
+EXENAME = takeflight
 OBJS = Airport.o BFS.o Traversal.o Graph.o ShortestPathFinder.o main.o
 
 CXX = clang++
