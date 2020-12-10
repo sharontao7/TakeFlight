@@ -41,6 +41,7 @@ int ShortestPathFinder::calculateDistance(Vertex start, Vertex end) {
     double dLat = lat2 - lat1;
     double dLon = lon2 - lon1;
     
+    // use haversine formula to calculate distance between radian values
     double dist = pow(sin(dLat / 2), 2) + cos(lat1) * cos(lat2) * pow(sin(dLon / 2), 2);
     dist = 2 * 6371 * asin(sqrt(dist));
     
@@ -171,6 +172,10 @@ vector<Airport> ShortestPathFinder::getShortestPath(Vertex start, Vertex end) {
     vector<Airport> path;
     bool destReached = false;
     
+    if (!graph_.vertexExists(start) || !graph_.vertexExists(end)) {
+        return path;
+    }
+    
     // queue stores remaining airports, ordered by distance
     priority_queue<pair<int, string>, vector<pair<int, string>>, greater<pair<int, string>>> airportQueue;
     map<string, int> distMap;
@@ -241,7 +246,12 @@ vector<Airport> ShortestPathFinder::buildLandmarkPath(vector<Airport> pathA, vec
 vector<Airport> ShortestPathFinder::getLandmarkPath(Vertex start, Vertex end, Vertex landmark) {
     vector<Airport> pathA;
     vector<Airport> pathB;
+    vector<Airport> path;
     int destReached = 0;
+    
+    if (!graph_.vertexExists(start) || !graph_.vertexExists(end) || !graph_.vertexExists(landmark)) {
+        return path;
+    }
     
     // queue stores remaining airports, ordered by distance
     priority_queue<pair<int, string>, vector<pair<int, string>>, greater<pair<int, string>>> airportQueue;
@@ -293,7 +303,8 @@ vector<Airport> ShortestPathFinder::getLandmarkPath(Vertex start, Vertex end, Ve
         buildPath(previous, end, pathB);
     }
     
-    return buildLandmarkPath(pathA, pathB);
+    path = buildLandmarkPath(pathA, pathB);
+    return path;
 }
 
 void ShortestPathFinder::printBFS(Vertex start_) {
