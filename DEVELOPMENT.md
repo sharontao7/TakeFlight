@@ -41,3 +41,11 @@ can also change our program so that the user can input which data files are read
 final presentation, and are meeting up tomorrow night to discuss how we will be distributing the parts for our 
 presentation. We will likely be filming parts of a script separately and compiling them into a video as our final 
 presentation. We hope to finish everything by Thursday night.
+
+12/9/2020
+We have completed our code today, by completing the implementations of Dijkstra's algorithm and the landmark path 
+algorithm. We also implemented a input system in main that allows the user to request specific outputs, which can be
+used to print/display the results of our traversal/algorithms. We plan on finishing up our code tonight, as well as 
+completing our script & powerpoint presentation for our final presentation video. We plan to record our parts individually
+tomorrow and compile them to have them submitted/ready by Friday. We will also be removing unnecessary files from
+our GitHub today, as well as having the README updated & complete.
