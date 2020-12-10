@@ -135,20 +135,6 @@ void ShortestPathFinder::buildPath(map<string, string> &previous, string &dest, 
     path.push_back(airports[dest]);
 }
 
-string ShortestPathFinder::closestAirport(map<string, int> distMap, map<string, bool> airportSet) {
-    int min = INT_MAX;
-    string min_airport;
-
-    for (map<string, Airport>::iterator it = airports.begin(); it != airports.end(); it++) {
-        if (airportSet.find(it->first) != airportSet.end() && airportSet[it->first] == false && distMap[it->first] <= min) {
-            min = distMap[it->first];
-            min_airport = it->first;
-        }
-    }
-   
-    return min_airport;
-}
-
 void ShortestPathFinder::printPath(vector<Airport> path) {
     cout << endl << "Shortest Path (using Dijkstra's Algorithm):" << endl;
     
@@ -292,7 +278,12 @@ vector<Airport> ShortestPathFinder::getLandmarkPath(Vertex start, Vertex end, Ve
     return buildLandmarkPath(pathA, pathB);
 }
 
-void ShortestPathFinder::BFSTraversal(Vertex start_) {
+void ShortestPathFinder::printBFS(Vertex start_) {
+    if (!graph_.vertexExists(start_)) {
+        cout << "Starting vertex does not exist." << endl << endl;
+        return;
+    }
+    
     BFS bfs(graph_, start_);
 
     cout << endl << "BFS Traversal:" << endl;

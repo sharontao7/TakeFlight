@@ -25,9 +25,9 @@ int main(/* int argc, const char * argv[]*/) {
     
     /* // for valgrind testing
     ShortestPathFinder spf("airports.dat", "routes.dat");
-    spf.BFSTraversal("1");
-    spf.getShortestPath("1", "1000");
-    //spf.getLandmarkPath("1", "5", "2");
+    spf.printBFS("1");
+    spf.getShortestPath("1", "3");
+    spf.getLandmarkPath("1", "5", "2");
     */
     
     int pickData;
@@ -35,14 +35,14 @@ int main(/* int argc, const char * argv[]*/) {
     cin >> pickData;
     
     string airportFile, routeFile;
-    if (pickData == 1) {
+    if (pickData == 1) {                        // ask user to input data files
         cout << "Enter airport file name: ";
         cin >> airportFile;
         cout << "Enter route file name: ";
         cin >> routeFile;
-    } else {
-        airportFile = "airports_sample.dat";
-        routeFile = "routes_sample.dat";
+    } else {                                    // use default files
+        airportFile = "airports.dat";
+        routeFile = "routes.dat";
     }
     
     ShortestPathFinder spf(airportFile, routeFile);
@@ -58,7 +58,7 @@ int main(/* int argc, const char * argv[]*/) {
             string start;
             cout << "Enter starting airport ID: ";
             cin >> start;
-            spf.BFSTraversal(start);
+            spf.printBFS(start);
             
         } else if (input == 2) {    // Shortest Path (Dijkstra)
             string start, end;
