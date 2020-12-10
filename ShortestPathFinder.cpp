@@ -149,8 +149,12 @@ string ShortestPathFinder::closestAirport(map<string, int> distMap, map<string, 
     return min_airport;
 }
 
-void ShortestPathFinder::printPath(vector<Airport> &path) {
+void ShortestPathFinder::printPath(vector<Airport> path) {
     cout << endl << "Shortest Path (using Dijkstra's Algorithm):" << endl;
+    
+    if (path.empty()) {
+        cout << "No possible path found." << endl;
+    }
     
     for (Airport airport : path) {
         cout << airport.getID() << " " << airport.getName() << endl;
@@ -208,21 +212,84 @@ vector<Airport> ShortestPathFinder::getShortestPath(Vertex start, Vertex end) {
     
     if (destReached) {
         buildPath(previous, end, path);
-        printPath(path);
-    } else {
-        cout << "No path from " << start << " to " << end << " found." << endl;
     }
     
     return path;
 }
 
-vector<Airport> ShortestPathFinder::getLandmarkPath(Vertex start, Vertex end, Vertex toVisit) {
-
-    vector<Airport> ret;
+vector<Airport> ShortestPathFinder::buildLandmarkPath(vector<Airport> pathA, vector<Airport> pathB) {
+    vector<Airport> fullPath;
     
-    // use dijkstra to find path from start to toVisit, toVisit to end & combine
+    if (pathA.empty() || pathB.empty()) {
+        return fullPath;
+    }
+    
+    for (unsigned i = 0; i < pathA.size(); i++) {
+        fullPath.push_back(pathA.back());
+        pathA.pop_back();
+    }
+    
+    fullPath.insert(fullPath.end(), pathB.begin(), pathB.end());
+    
+    return fullPath;
+}
 
-    return ret;
+vector<Airport> ShortestPathFinder::getLandmarkPath(Vertex start, Vertex end, Vertex landmark) {
+    vector<Airport> pathA;
+    vector<Airport> pathB;
+    int destReached = 0;
+    
+    // queue stores remaining airports, ordered by distance
+    priority_queue<pair<int, string>, vector<pair<int, string>>, greater<pair<int, string>>> airportQueue;
+    map<string, int> distMap;
+    map<string, string> previous;
+    
+    // insert starting airport into queue
+    airportQueue.emplace(0, landmark);
+    distMap[landmark] = 0;
+    previous[landmark] = "*";
+    
+    // initialize all starting distances (other than starting airport) to "infinity"
+    // parents are undefined for now
+    for (map<string, Airport>::iterator it = airports.begin(); it != airports.end(); it++) {
+        if (it->first != landmark) {
+            distMap[it->first] = INT_MAX;
+            previous[it->first] = "";
+        }
+    }
+    
+    while (!airportQueue.empty()) {
+        pair<int, string> curr = airportQueue.top();
+        airportQueue.pop();
+        
+        // end if destination airport has been found & accounted for already
+        if (curr.second == start || curr.second == end) {
+            destReached++;
+        }
+        
+        if (destReached == 2)
+            break;
+        
+        // iterate through neighbors for current airport
+        vector<Vertex> neighbors = graph_.getAdjacent(curr.second);
+        for (Vertex neighbor : neighbors) {
+            // get total distance from current airport to neighbor
+            // if this is less than the current distance stored, insert into queue
+            int dist = graph_.getEdgeWeight(curr.second, neighbor) + curr.first;
+            if (dist < distMap[neighbor]) {
+                distMap[neighbor] = dist;
+                previous[neighbor] = curr.second;
+                airportQueue.emplace(dist, neighbor);
+            }
+        }
+    }
+    
+    if (destReached == 2) {
+        buildPath(previous, start, pathA);
+        buildPath(previous, end, pathB);
+    }
+    
+    return buildLandmarkPath(pathA, pathB);
 }
 
 void ShortestPathFinder::BFSTraversal(Vertex start_) {

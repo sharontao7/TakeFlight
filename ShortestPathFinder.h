@@ -26,12 +26,13 @@ public:
     /**
      * Landmark path algorithm
      */
-    vector<Airport> getLandmarkPath(Vertex start, Vertex end, Vertex toVisit);
+    vector<Airport> getLandmarkPath(Vertex start, Vertex end, Vertex landmark);
     
     void BFSTraversal(Vertex start);
     
     void printGraph();
     void printNeighbors(Vertex airport);
+    void printPath(vector<Airport> path);
 
 private:
     Graph graph_;
@@ -41,6 +42,6 @@ private:
     void readRouteData(string filename);        // create edges iin graph
 
     string closestAirport(map<string, int> distMap, map<string, bool> airportSet);
-    void printPath(vector<Airport> &path);
     void buildPath(map<string, string> &previous, string &dest, vector<Airport>& path);
+    vector<Airport> buildLandmarkPath(vector<Airport> pathA, vector<Airport> pathB);
 };

@@ -8,6 +8,7 @@
 #include "Graph.h"
 
 void printInstructions() {
+    cout << endl;
     cout << "Options:" << endl;
     cout << "0 - Quit" << endl;
     cout << "1 - BFS" << endl;
@@ -16,18 +17,19 @@ void printInstructions() {
     cout << "4 - Print Graph" << endl;
     cout << "5 - Print Neighbors" << endl;
     cout << "6 - Help" << endl;
+    cout << endl;
 }
 
 int main(/* int argc, const char * argv[]*/) {
     // TODO
     
-    // for valgrind testing
+    /* // for valgrind testing
     ShortestPathFinder spf("airports.dat", "routes.dat");
-    //spf.BFSTraversal("1");
+    spf.BFSTraversal("1");
     spf.getShortestPath("1", "1000");
     //spf.getLandmarkPath("1", "5", "2");
+    */
     
-    /*
     int pickData;
     cout << "Enter 1 if you do not wish to use the default data files: ";
     cin >> pickData;
@@ -64,7 +66,8 @@ int main(/* int argc, const char * argv[]*/) {
             cin >> start;
             cout << "Enter destination airport ID: ";
             cin >> end;
-            spf.getShortestPath(start, end);
+            vector<Airport> path = spf.getShortestPath(start, end);
+            spf.printPath(path);
             
         } else if (input == 3) {    // Landmark Path
             string start, end, landmark;
@@ -74,7 +77,8 @@ int main(/* int argc, const char * argv[]*/) {
             cin >> end;
             cout << "Enter landmark airport ID: ";
             cin >> landmark;
-            spf.getLandmarkPath(start, end, landmark);
+            vector<Airport> path = spf.getLandmarkPath(start, end, landmark);
+            spf.printPath(path);
             
         } else if (input == 4) {    // Print Graph
             spf.printGraph();
@@ -92,7 +96,7 @@ int main(/* int argc, const char * argv[]*/) {
             cout << "Please enter a valid action #." << endl;
         }
     }
-   */
+
     return 0;
 
 }
