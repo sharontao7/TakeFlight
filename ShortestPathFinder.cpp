@@ -106,19 +106,21 @@ void ShortestPathFinder::readRouteData(string fileName) {
         }
         
         // insert edge between source & destination vertices in graph
-        graph_.insertEdge(sourceID, destID);
+        if (graph_.vertexExists(sourceID) && graph_.vertexExists(destID)) {
+            graph_.insertEdge(sourceID, destID);
+            
+            // calculate dist between source & dest
+            // set as edge weight
+            Airport sourceLoc = airports[sourceID];
+            Airport destLoc = airports[destID];
         
-        // calculate dist between source & dest
-        // set as edge weight
-        Airport sourceLoc = airports[sourceID];
-        Airport destLoc = airports[destID];
-    
-        double lon = destLoc.getLongitude() - sourceLoc.getLongitude();
-        double lat = destLoc.getLatitude() - sourceLoc.getLatitude();
-        
-        double dist = 2 * 6371 *
-                (asin(sqrt(pow(sin(lat / 2), 2) + cos(sourceLoc.getLatitude()) * cos(destLoc.getLatitude()) * pow(sin(lon / 2), 2))));
-        graph_.setEdgeWeight(sourceID, destID, dist);
+            double lon = destLoc.getLongitude() - sourceLoc.getLongitude();
+            double lat = destLoc.getLatitude() - sourceLoc.getLatitude();
+            
+            double dist = 2 * 6371 *
+                    (asin(sqrt(pow(sin(lat / 2), 2) + cos(sourceLoc.getLatitude()) * cos(destLoc.getLatitude()) * pow(sin(lon / 2), 2))));
+            graph_.setEdgeWeight(sourceID, destID, dist);
+        }
         
     }
     
@@ -284,7 +286,7 @@ vector<Airport> ShortestPathFinder::getLandmarkPath(Vertex start, Vertex end, Ve
 
 void ShortestPathFinder::printBFS(Vertex start_) {
     if (!graph_.vertexExists(start_)) {
-        cout << "Starting vertex does not exist." << endl << endl;
+        cout << endl << "Airport ID does not exist." << endl << endl;
         return;
     }
     
@@ -304,6 +306,11 @@ void ShortestPathFinder::printGraph() {
 }
 
 void ShortestPathFinder::printNeighbors(Vertex airport) {
+    if (!graph_.vertexExists(airport)) {
+        cout << endl << "Airport ID does not exist." << endl << endl;
+        return;
+    }
+    
     vector<Vertex> neighbors = graph_.getAdjacent(airport);
     
     cout << endl;
