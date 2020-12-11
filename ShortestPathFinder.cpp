@@ -24,6 +24,9 @@ ShortestPathFinder::~ShortestPathFinder() {
     airports.clear();
 }
 
+/**
+ * Calculates distance between two vertices using longitude and latitude.
+ **/
 int ShortestPathFinder::calculateDistance(Vertex start, Vertex end) {
     Airport sourceLoc = airports[start];
     Airport destLoc = airports[end];
@@ -45,6 +48,9 @@ int ShortestPathFinder::calculateDistance(Vertex start, Vertex end) {
     return (int) dist;
 }
 
+/**
+ * Reads in airport data from airport.dat file.
+ **/
 void ShortestPathFinder::readAirportData(string fileName) {
     ifstream infile(fileName);
     
@@ -89,15 +95,11 @@ void ShortestPathFinder::readAirportData(string fileName) {
     {
         cerr << "Airports data file could not be read.\nPlease enter 0 to exit the program.\n";
     }
-    
-    /*
-    // print dictionary
-    for (std::pair<string, Airport> airport : airports) {
-        std::cout << "Airport: " << airport.second.getName() << " " << airport.second.getLatitude() << " " << airport.second.getLongitude() << std::endl;
-    }
-    */
 }
 
+/**
+ * Reads in route data from route.dat file.
+ **/
 void ShortestPathFinder::readRouteData(string fileName) {
     ifstream infile(fileName);
     
@@ -140,17 +142,23 @@ void ShortestPathFinder::readRouteData(string fileName) {
     }
 }
 
+/**
+ * Build path helper function for getShortestPath method.
+ **/
 void ShortestPathFinder::buildPath(map<string, string> &previous, string &dest, vector<Airport>& path) {
-    // Base Case : If j is source
+    // if previous destination is "*" push back destination
     if (previous[dest] == "*") {
         path.push_back(airports[dest]);
         return;
     }
- 
+    // recursive vall to build path
     buildPath(previous, previous[dest], path);
     path.push_back(airports[dest]);
 }
 
+/**
+ * Print path helper function for getShortestPath method.
+ **/
 void ShortestPathFinder::printPath(vector<Airport> path) {
     cout << endl;
     
@@ -165,6 +173,9 @@ void ShortestPathFinder::printPath(vector<Airport> path) {
     cout << endl;
 }
 
+/**
+ * Implements Dikjstra's Algorithm to find the shortest path between two vertices. 
+ **/
 vector<Airport> ShortestPathFinder::getShortestPath(Vertex start, Vertex end) {
     vector<Airport> path;
     bool destReached = false;
@@ -223,6 +234,9 @@ vector<Airport> ShortestPathFinder::getShortestPath(Vertex start, Vertex end) {
     return path;
 }
 
+/**
+ * Build path helper function for getLandmarkPath method.
+ **/
 vector<Airport> ShortestPathFinder::buildLandmarkPath(vector<Airport> pathA, vector<Airport> pathB) {
     vector<Airport> fullPath;
     
@@ -241,6 +255,9 @@ vector<Airport> ShortestPathFinder::buildLandmarkPath(vector<Airport> pathA, vec
     return fullPath;
 }
 
+/**
+ * Implements Landmark Path Algorithm to find path between start, landmark, and end vertices.
+ **/
 vector<Airport> ShortestPathFinder::getLandmarkPath(Vertex start, Vertex end, Vertex landmark) {
     vector<Airport> pathA;
     vector<Airport> pathB;
@@ -307,6 +324,9 @@ vector<Airport> ShortestPathFinder::getLandmarkPath(Vertex start, Vertex end, Ve
     return path;
 }
 
+/**
+ * Prints complete BFS traversal over all components in graph.
+ **/
 void ShortestPathFinder::printCompleteBFS() {
     cout << endl << "Complete BFS Traversal (all components)" << endl;
     
@@ -351,6 +371,9 @@ void ShortestPathFinder::printCompleteBFS() {
     cout << endl;
 }
 
+/**
+ * Prints component BFS traversal over components in graph.
+ **/
 void ShortestPathFinder::printBFS(Vertex start_) {
     cout << endl << "BFS Traversal (component of given airport only)" << endl;
     
@@ -390,10 +413,16 @@ void ShortestPathFinder::printBFS(Vertex start_) {
     cout << endl;
 }
 
+/**
+ * Helper method to print graph.
+ **/
 void ShortestPathFinder::printGraph() {
     graph_.print();
 }
 
+/**
+ * Prints nearest neighbors at a vertex.
+ **/
 void ShortestPathFinder::printNeighbors(Vertex airport) {
     if (!graph_.vertexExists(airport)) {
         cout << endl << "Airport ID does not exist." << endl << endl;
