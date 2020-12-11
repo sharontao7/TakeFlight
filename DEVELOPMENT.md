@@ -57,5 +57,7 @@ After seeing some updates on Piazza, we decided to change the implementation of 
 and Traversal class, we simply added methods for doing both a full BFS of a graph, and partial BFS of a specific
 graph component to our ShortestPathFinder class. We found that this also works much faster than our previous i
 mplementation. We removed the unneeded class files and updated our Makefile accordingly, as well. We have 
-finished our RESULTS, README, and finished creating our Powerpoint and script for our final presentation. We plan to 
-finish recording it tonight, and Brianna will submit tomorrow after putting finishing edits on it.
+finished our RESULTS, README, and finished creating our Powerpoint and script for our final presentation. We finished 
+recording it at our meeting tonight, and Brianna will be uploading it to Youtube and submitting it.
+We also ran into a segfault while testing different cases for the landmark path, but fixed it promptly, as well as fixed a 
+minor incorrect print statement. We will finish polishing up our code as the final version tonight.
