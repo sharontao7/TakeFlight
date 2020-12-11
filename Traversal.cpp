@@ -17,7 +17,6 @@
  * Default iterator constructor.
  */
 Traversal::Iterator::Iterator() {
-  /** @todo [Part 1] */
   traversal_ = NULL;
   isAtEnd_ = true;
 }
@@ -30,9 +29,9 @@ Traversal::Iterator::Iterator(Graph graph, Vertex start, Traversal* traversal) {
     start_ = start;
     traversal_ = traversal;
     isAtEnd_ = false;
-    //need to resolve Vertex vs Airport Issue
     current_ = traversal_->peek();
     vector<Vertex> vertices = graph.getVertices();
+    //set every vertex in visited map to false for have not been visited
     for(unsigned x = 0; x < vertices.size(); x++){
         Vertex currVert = graph.getVertices().at(x);
         visited.insert(pair<Vertex, bool>(currVert, false));
@@ -46,7 +45,6 @@ Traversal::Iterator::Iterator(Graph graph, Vertex start, Traversal* traversal) {
  * Advances the traversal of the image.
  */
 Traversal::Iterator & Traversal::Iterator::operator++() {
-  /** @todo [Part 1] */
   if(traversal_->empty()){
     isAtEnd_ = true;
     return *this;
@@ -69,12 +67,6 @@ Traversal::Iterator & Traversal::Iterator::operator++() {
     //check if the neighbour vertex has not been visited, add to the traversal if it hasn't
     for(int i = 0; i < (int)neighbours.size(); i++){
       Vertex currVert = neighbours.at(i);
-      /*
-      map<Vertex,bool>::iterator it = visited.find(currVert);
-      if(it != visited.end()){
-        traversal_->add(currVert);
-      }
-      */
 
       if(!visited[currVert]){
         traversal_->add(currVert);
@@ -95,7 +87,6 @@ Traversal::Iterator & Traversal::Iterator::operator++() {
  * Accesses the current Point in the Traversal.
  */
 Vertex Traversal::Iterator::operator*() {
-  /** @todo [Part 1] */
   return current_;
 }
 
@@ -105,7 +96,6 @@ Vertex Traversal::Iterator::operator*() {
  * Determines if two iterators are not equal.
  */
 bool Traversal::Iterator::operator!=(const Traversal::Iterator &other) {
-  /** @todo [Part 1] */
   bool thisIsEmpty = false;
   bool otherIsEmpty = false;
   if(traversal_ == nullptr || traversal_->empty()){

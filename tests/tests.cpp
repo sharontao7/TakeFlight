@@ -34,7 +34,7 @@ Graph getTestGraph(){
 
 Graph getSampleTestGraph(){
   ShortestPathFinder spf("airports_sample.dat", "routes_sample.dat");
-  return spf.graph_;
+  return spf.getGraph();
 }
 
 TEST_CASE("BFS maintains the correct point on top", "[weight=0][part=1][part=1a]") {
@@ -131,9 +131,9 @@ TEST_CASE("BFS iterator visits all points in the correct order: sample data grap
   ++it;
   REQUIRE( *it == "2");
   ++it;
-  REQUIRE( *it == "3");
-  ++it;
   REQUIRE( *it == "1");
+  ++it;
+  REQUIRE( *it == "3");
 }
 
 TEST_CASE("BFS iterator visits all points in the correct order: sample data graph starting point = 3", "[weight=0][part=1][part=1a]") {
