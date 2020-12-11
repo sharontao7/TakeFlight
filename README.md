@@ -25,6 +25,6 @@ This project takes data from OpenFlights airports and routes datasets, stored in
 - Airport database: airport ID, name, city, country, IATA, ICAO, latitude, longitude, altitude, timezone, DST, Tz database time zone, type, source
 - Route database: airline, airline ID, source airport, source airport ID, destination airport ID, codeshare, stops, equipment
 
-Make and run the executable *./takeflight* to begin. You will then have the option to use your own data file or use the default files. Once chosen, a menu should pop up with options to explore the data. Then enter inputs for the following requests to get the corresponsing result.
+Make and run the executable *./takeflight* to begin. You will then have the option to use your own data file or use the default files. Once chosen, a menu should pop up with options to explore the data. Then enter inputs for the following requests to get the corresponding result.
 
 ![Example](READMEexampleimg.png)
