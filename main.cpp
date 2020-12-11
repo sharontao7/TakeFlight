@@ -3,8 +3,6 @@
 
 #include "ShortestPathFinder.h"
 #include "Airport.h"
-#include "BFS.h"
-#include "Traversal.h"
 #include "Graph.h"
 
 void printInstructions() {

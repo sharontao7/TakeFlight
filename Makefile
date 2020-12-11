@@ -1,5 +1,5 @@
 EXENAME = takeflight
-OBJS = Airport.o BFS.o Traversal.o Graph.o ShortestPathFinder.o main.o
+OBJS = Airport.o Graph.o ShortestPathFinder.o main.o
 
 CXX = clang++
 CXXFLAGS = $(CS225) -std=c++1y -stdlib=libc++ -c -g -O0 -Wall -Wextra -pedantic
@@ -30,17 +30,11 @@ output_msg: ; $(CLANG_VERSION_MSG)
 $(EXENAME): output_msg $(OBJS)
 	$(LD) $(OBJS) $(LDFLAGS) -o $(EXENAME)
 
-main.o: main.cpp ShortestPathFinder.h BFS.h Traversal.h Airport.h Graph.h random.h
+main.o: main.cpp ShortestPathFinder.h Airport.h Graph.h random.h
 	$(CXX) $(CXXFLAGS) main.cpp
 
-ShortestPathFinder.o: ShortestPathFinder.cpp ShortestPathFinder.h BFS.h Traversal.h Airport.h Graph.h random.h
+ShortestPathFinder.o: ShortestPathFinder.cpp ShortestPathFinder.h Airport.h Graph.h random.h
 	$(CXX) $(CXXFLAGS) ShortestPathFinder.cpp
-
-BFS.o: BFS.cpp BFS.h Traversal.h
-	$(CXX) $(CXXFLAGS) BFS.cpp 
-
-Traversal.o: Traversal.cpp Traversal.h Graph.h
-	$(CXX) $(CXXFLAGS) Traversal.cpp
 
 Graph.o: Graph.cpp Graph.h random.cpp
 	$(CXX) $(CXXFLAGS) Graph.cpp
@@ -48,10 +42,10 @@ Graph.o: Graph.cpp Graph.h random.cpp
 Airport.o: Airport.cpp Airport.h
 	$(CXX) $(CXXFLAGS) Airport.cpp
 
-test: output_msg tests.o Airport.o BFS.o Traversal.o Graph.o ShortestPathFinder.o
-	$(LD) tests.o Airport.o BFS.o Traversal.o Graph.o ShortestPathFinder.o $(LDFLAGS) -o test
+test: output_msg tests.o Airport.o Graph.o ShortestPathFinder.o
+	$(LD) tests.o Airport.o Graph.o ShortestPathFinder.o $(LDFLAGS) -o test
 
-tests.o: tests/tests.cpp cs225/catch/catch.hpp Airport.h BFS.h Traversal.h Graph.h ShortestPathFinder.h Graph.h 
+tests.o: tests/tests.cpp cs225/catch/catch.hpp Airport.h Graph.h ShortestPathFinder.h Graph.h 
 	$(CXX) $(CXXFLAGS) tests/tests.cpp
 
 clean:

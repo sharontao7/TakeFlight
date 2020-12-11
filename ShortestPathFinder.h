@@ -10,8 +10,6 @@
 
 #include "Graph.h"
 #include "Airport.h"
-#include "BFS.h"
-#include "Traversal.h"
 
 using namespace std;
 

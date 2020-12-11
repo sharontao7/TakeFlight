@@ -9,9 +9,6 @@
 #include <queue>
 
 #include "ShortestPathFinder.h"
-#include "Graph.h"
-#include "BFS.h"
-#include "Traversal.h"
 
 ShortestPathFinder::ShortestPathFinder() : graph_(true, true) {
     readAirportData("airports.dat");
@@ -353,7 +350,7 @@ void ShortestPathFinder::printCompleteBFS() {
 }
 
 void ShortestPathFinder::printBFS(Vertex start_) {
-    cout << endl << "BFS Traversal (neighbors of given airport only)" << endl;
+    cout << endl << "BFS Traversal (component of given airport only)" << endl;
     
     if (!graph_.vertexExists(start_)) {
         cout << "Airport ID does not exist." << endl << endl;

@@ -6,11 +6,9 @@
 #include <string>
 #include <vector>
 
-#include "../BFS.h"
-#include "../Traversal.h"
 #include "../ShortestPathFinder.h"
 #include "../Airport.h"
-
+/*
 using namespace cs225;
 
 Graph getTestGraph(){
@@ -147,5 +145,5 @@ TEST_CASE("BFS iterator visits all points in the correct order: sample data grap
   ++it;
 }
 
-
+*/
 
