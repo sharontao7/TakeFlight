@@ -249,6 +249,8 @@ vector<Airport> ShortestPathFinder::getLandmarkPath(Vertex start, Vertex end, Ve
     
     if (!graph_.vertexExists(start) || !graph_.vertexExists(end) || !graph_.vertexExists(landmark)) {
         return path;
+    } else if (graph_.getAdjacent(start).empty() || graph_.getAdjacent(end).empty() || graph_.getAdjacent(landmark).empty()) {
+        return path;
     }
     
     // queue stores remaining airports, ordered by distance
