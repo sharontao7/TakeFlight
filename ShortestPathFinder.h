@@ -33,6 +33,7 @@ public:
     vector<Airport> getLandmarkPath(Vertex start, Vertex end, Vertex landmark);
     
     void printBFS(Vertex start);
+    void printCompleteBFS();
     void printGraph();
     void printNeighbors(Vertex airport);
     void printPath(vector<Airport> path);

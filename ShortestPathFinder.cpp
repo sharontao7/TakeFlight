@@ -229,15 +229,16 @@ vector<Airport> ShortestPathFinder::getShortestPath(Vertex start, Vertex end) {
 vector<Airport> ShortestPathFinder::buildLandmarkPath(vector<Airport> pathA, vector<Airport> pathB) {
     vector<Airport> fullPath;
     
+    // if either endpoint could not could not be reached, no valid path
     if (pathA.empty() || pathB.empty()) {
         return fullPath;
     }
     
+    // combine two paths in correct order
     for (unsigned i = 0; i < pathA.size(); i++) {
         fullPath.push_back(pathA.back());
         pathA.pop_back();
     }
-    
     fullPath.insert(fullPath.end(), pathB.begin(), pathB.end());
     
     return fullPath;
@@ -307,18 +308,84 @@ vector<Airport> ShortestPathFinder::getLandmarkPath(Vertex start, Vertex end, Ve
     return path;
 }
 
+void ShortestPathFinder::printCompleteBFS() {
+    cout << endl << "Complete BFS Traversal (all components)" << endl;
+    
+    // set all vertices and edges to unexplored/unvisited
+    map<Vertex, bool> visited;
+    for (Vertex v : graph_.getVertices()) {
+        visited[v] = false;
+    }
+    for (Edge e: graph_.getEdges()){
+        graph_.setEdgeLabel(e.source, e.dest, "UNEXPLORED");
+    }
+    
+    // traverse all vertices, visit unexplored vertices in BFS order
+    for (Vertex v : graph_.getVertices()) {
+        if (visited[v] == false) {
+            queue<Vertex> traversal;
+            visited[v] = true;
+            cout << "Airport: " << v << " " << airports[v].getName() << endl;
+            traversal.push(v);
+            
+            while (!traversal.empty()) {
+                Vertex curr = traversal.front();
+                traversal.pop();
+                
+                // visit neighbors of current vertex
+                for (Vertex w : graph_.getAdjacent(curr)) {
+                    if (visited[w] == false) {
+                        graph_.setEdgeLabel(curr, w, "DISCOVERY");
+                        visited[w] = true;
+                        cout << "Airport: " << w << " " << airports[w].getName() << endl;
+                        traversal.push(w);
+                    } else {
+                        if (graph_.getEdgeLabel(curr, w) == "UNEXPLORED") {
+                            graph_.setEdgeLabel(curr, w, "CROSS");
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    cout << endl;
+}
+
 void ShortestPathFinder::printBFS(Vertex start_) {
+    cout << endl << "BFS Traversal (neighbors of given airport only)" << endl;
+    
     if (!graph_.vertexExists(start_)) {
-        cout << endl << "Airport ID does not exist." << endl << endl;
+        cout << "Airport ID does not exist." << endl << endl;
         return;
     }
     
-    BFS bfs(graph_, start_);
-
-    cout << endl << "BFS Traversal:" << endl;
+    map<Vertex, bool> visited;
+    queue<Vertex> traversal;
     
-    for(Traversal::Iterator it = bfs.begin();it != bfs.end(); ++it){
-        cout << "Airport: " << *it << " " << airports[*it].getName() << endl;
+    // visit starting vertex/airport first
+    visited[start_] = true;
+    cout << "Airport: " << start_ << " " << airports[start_].getName() << endl;
+    traversal.push(start_);
+    
+    // visit all vertices within same component
+    while (!traversal.empty()) {
+        Vertex curr = traversal.front();
+        traversal.pop();
+        
+        // visit all neighboring vertices
+        for (Vertex neighbor : graph_.getAdjacent(curr)) {
+            if (visited[neighbor] == false) {
+                graph_.setEdgeLabel(curr, neighbor, "DISCOVERY");
+                visited[neighbor] = true;
+                cout << "Airport: " << neighbor << " " << airports[neighbor].getName() << endl;
+                traversal.push(neighbor);
+            } else {
+                if (graph_.getEdgeLabel(curr, neighbor) == "UNEXPLORED") {
+                    graph_.setEdgeLabel(curr, neighbor, "CROSS");
+                }
+            }
+        }
     }
     
     cout << endl;

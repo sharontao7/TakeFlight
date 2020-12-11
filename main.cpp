@@ -11,12 +11,13 @@ void printInstructions() {
     cout << endl;
     cout << "Options:" << endl;
     cout << "0 - Quit" << endl;
-    cout << "1 - BFS" << endl;
-    cout << "2 - Shortest Path (Dijkstra)" << endl;
-    cout << "3 - Landmark Path" << endl;
-    cout << "4 - Print Graph" << endl;
-    cout << "5 - Print Neighbors" << endl;
-    cout << "6 - Help" << endl;
+    cout << "1 - Complete BFS" << endl;
+    cout << "2 - Component BFS" << endl;
+    cout << "3 - Shortest Path (Dijkstra)" << endl;
+    cout << "4 - Landmark Path" << endl;
+    cout << "5 - Print Graph" << endl;
+    cout << "6 - Print Neighbors" << endl;
+    cout << "7 - Help" << endl;
     cout << endl;
 }
 
@@ -55,12 +56,15 @@ int main(/* int argc, const char * argv[]*/) {
         cin >> input;
         
         if (input == 1) {           // BFS Traversal
+            spf.printCompleteBFS();
+            
+        } else if (input == 2) {    // Shortest Path (Dijkstra)
             string start;
             cout << "Enter starting airport ID: ";
             cin >> start;
             spf.printBFS(start);
             
-        } else if (input == 2) {    // Shortest Path (Dijkstra)
+        } else if (input == 3) {    // Shortest Path (Dijkstra)
             string start, end;
             cout << "Enter starting airport ID: ";
             cin >> start;
@@ -69,7 +73,7 @@ int main(/* int argc, const char * argv[]*/) {
             vector<Airport> path = spf.getShortestPath(start, end);
             spf.printPath(path);
             
-        } else if (input == 3) {    // Landmark Path
+        } else if (input == 4) {    // Landmark Path
             string start, end, landmark;
             cout << "Enter starting airport ID: ";
             cin >> start;
@@ -80,16 +84,16 @@ int main(/* int argc, const char * argv[]*/) {
             vector<Airport> path = spf.getLandmarkPath(start, end, landmark);
             spf.printPath(path);
             
-        } else if (input == 4) {    // Print Graph
+        } else if (input == 5) {    // Print Graph
             spf.printGraph();
             
-        } else if (input == 5) {    // Print Neighbors
+        } else if (input == 6) {    // Print Neighbors
             string airportID;
             cout << "Enter desired airport ID: ";
             cin >> airportID;
             spf.printNeighbors(airportID);
             
-        } else if (input == 6) {    // Print Instructions
+        } else if (input == 7) {    // Print Instructions
             printInstructions();
             
         } else if (input != 0) {    // Check for valid input
