@@ -20,8 +20,6 @@ void printInstructions() {
 }
 
 int main(/* int argc, const char * argv[]*/) {
-    // TODO
-    
     /* // for valgrind testing
     ShortestPathFinder spf("airports.dat", "routes.dat");
     spf.printBFS("1");
