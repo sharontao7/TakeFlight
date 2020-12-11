@@ -37,6 +37,7 @@ public:
     void printGraph();
     void printNeighbors(Vertex airport);
     void printPath(vector<Airport> path);
+    Graph getGraph();
 
 private:
     Graph graph_;

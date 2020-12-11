@@ -19,12 +19,10 @@
 using namespace cs225;
 
 /**
- * Initializes a breadth-first Traversal on a given `png` image,
- * starting at `start`, and with a given `tolerance`.
- * @param png The image this BFS is going to traverse
+ * Initializes a breadth-first Traversal on a given graph,
+ * starting at `start`
+ * @param graph The graph this BFS is going to traverse
  * @param start The start point of this BFS
- * @param tolerance If the current point is too different (difference larger than tolerance) with the start point,
- * it will not be included in this BFS
  */
 BFS::BFS(const Graph & graph, const Vertex & start) {  
   start_ = start;

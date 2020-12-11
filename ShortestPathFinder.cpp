@@ -412,3 +412,7 @@ void ShortestPathFinder::printNeighbors(Vertex airport) {
     
     cout << endl;
 }
+
+Graph ShortestPathFinder::getGraph() {
+    return graph_;
+}
