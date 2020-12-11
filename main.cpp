@@ -66,6 +66,7 @@ int main(/* int argc, const char * argv[]*/) {
             cin >> start;
             cout << "Enter destination airport ID: ";
             cin >> end;
+            cout << endl << "Shortest Path (using Dijkstra's Algorithm):";
             vector<Airport> path = spf.getShortestPath(start, end);
             spf.printPath(path);
             
@@ -77,6 +78,7 @@ int main(/* int argc, const char * argv[]*/) {
             cin >> end;
             cout << "Enter landmark airport ID: ";
             cin >> landmark;
+            cout << endl << "Landmark Path:";
             vector<Airport> path = spf.getLandmarkPath(start, end, landmark);
             spf.printPath(path);
             

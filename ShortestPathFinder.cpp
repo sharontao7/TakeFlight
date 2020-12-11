@@ -152,7 +152,7 @@ void ShortestPathFinder::buildPath(map<string, string> &previous, string &dest, 
 }
 
 void ShortestPathFinder::printPath(vector<Airport> path) {
-    cout << endl << "Shortest Path (using Dijkstra's Algorithm):" << endl;
+    cout << endl;
     
     if (path.empty()) {
         cout << "No possible path found." << endl;
