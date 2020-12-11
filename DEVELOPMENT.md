@@ -51,3 +51,11 @@ our results from the traversal/algorithm, and also to test different airport inp
 created a script and powerpoint for us, that we will be finishing up by tomorrow to meet and record our final 
 presentation. Nadine worked on the RESULTS document, and Sharon worked on the README. We will be going over 
 all our deliverables tomorrow to make sure we haven't missed anything and to finalize everything for submission.
+
+12/10/2020
+After seeing some updates on Piazza, we decided to change the implementation of our BFS. Instead of using a BFS
+and Traversal class, we simply added methods for doing both a full BFS of a graph, and partial BFS of a specific
+graph component to our ShortestPathFinder class. We found that this also works much faster than our previous i
+mplementation. We removed the unneeded class files and updated our Makefile accordingly, as well. We have 
+finished our RESULTS, README, and finished creating our Powerpoint and script for our final presentation. We plan to 
+finish recording it tonight, and Brianna will submit tomorrow after putting finishing edits on it.
