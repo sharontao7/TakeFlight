@@ -175,6 +175,7 @@ void ShortestPathFinder::printPath(vector<Airport> path) {
 
 /**
  * Implements Dikjstra's Algorithm to find the shortest path between two vertices. 
+ * Adapted from https://www.geeksforgeeks.org/dijkstras-shortest-path-algorithm-greedy-algo-7/
  **/
 vector<Airport> ShortestPathFinder::getShortestPath(Vertex start, Vertex end) {
     vector<Airport> path;
@@ -257,6 +258,7 @@ vector<Airport> ShortestPathFinder::buildLandmarkPath(vector<Airport> pathA, vec
 
 /**
  * Implements Landmark Path Algorithm to find path between start, landmark, and end vertices.
+ * Adapted from https://www.coursera.org/lecture/cs-fundamentals-3/4-3-4-graphs-landmark-path-problem-uQmGv
  **/
 vector<Airport> ShortestPathFinder::getLandmarkPath(Vertex start, Vertex end, Vertex landmark) {
     vector<Airport> pathA;
